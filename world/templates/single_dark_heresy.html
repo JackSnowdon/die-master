@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %} {% block page_title %} | {{ this_sheet }} {% endblock %} {% block content %}
+
+<section class="button-nav">
+    <div class="row mb-5">
+        <div class="col-12">
+            <a href="{% url 'world_home' %}" role="button" class="btn btn-warning" aria-disabled="false">Back</a>
+        </div>
+    </div>
+</section>
+
+
+<section class="stats">
+    <div class="row">
+        <div class="col-md-8 mb-0">
+            <h5>Name: {{ this_sheet.name }}</h5>
+        </div>
+        <div class="col-md-4 mb-0">
+            <h5>Fate Points: {{ this_sheet.max_fate_points }}</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 offset-md-1 mb-0">
+            <h5>Weapon Skill: {{ this_sheet.weapon_skill }}</h5>
+        </div>
+        <div class="col-md-2 mb-0">
+            <h5>Ballistic Skill: {{ this_sheet.ballistic_skill }}</h5>
+        </div>
+        <div class="col-md-2 mb-0">
+            <h5>Strengh: {{ this_sheet.strengh }}</h5>
+        </div>
+        <div class="col-md-2 mb-0">
+            <h5>Toughness: {{ this_sheet.toughness }}</h5>
+        </div>
+        <div class="col-md-2 mb-0">
+            <h5>Agility: {{ this_sheet.agility }}</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2 offset-md-1 mb-0">
+            <h5>Intelligence: {{ this_sheet.intelligence }}</h5>
+        </div>
+        <div class="col-md-2 mb-0">
+            <h5>Perception: {{ this_sheet.perception }}</h5>
+        </div>
+        <div class="col-md-2 mb-0">
+            <h5>Willpower: {{ this_sheet.willpower }}</h5>
+        </div>
+        <div class="col-md-2 mb-0">
+            <h5>Fellowship: {{ this_sheet.fellowship }}</h5>
+        </div>
+        <div class="col-md-2 mb-0">
+            <h5>Influence: {{ this_sheet.influence }}</h5>
+        </div>
+    </div>
+
+</section>
+
+
+{% endblock %}

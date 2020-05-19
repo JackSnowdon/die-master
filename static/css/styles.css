@@ -13,7 +13,7 @@
 /* Navbar */
 
 .nav-bg {
-    background-color: #d49a60;
+    background-color: #e2d4c6;
 }
 
 .nav-bg a {
@@ -25,7 +25,7 @@
 }
 
 .nav-bg a:hover {
-    color: rgb(80, 65, 121);
+    color: #40a54d
 }
 
 .nav-button {
@@ -57,4 +57,44 @@
 
 .table {
     color: #d7e7f0;
+}
+
+
+/* World */
+
+.sheet-list {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.sheet-list-item {
+    font-size: 20px;
+    padding-bottom: 0.45rem;
+}
+
+.sheet-list-item a {
+    transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
+    text-decoration: none;
+}
+
+.sheet-list-item a:hover {
+    color: white;
+}
+
+.single_dark_heresy {
+    color: #d7e7f0;
+}
+
+.sheet-list-edit {
+    font-size: 15px;
+    padding-left: 0.75rem;
+    color: #cf7815;
+}
+
+.sheet-list-delete {
+    font-size: 15px;
+    color: #862923;
 }
