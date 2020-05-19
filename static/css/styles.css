@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap');
+
+/* Background */
+
+.bg {
+    background-color: #ffffff;
+    font-family: 'Cantarell', sans-serif;
+}
+
+
+/* Navbar */
+
+.nav-bg {
+    background-color: #080807;
+}
+
+.nav-bg a {
+    color: #f4f4f4;
+    transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+    -o-transition: all 0.35s ease-in-out;
+}
+
+.nav-bg a:hover {
+    color: #cf7815;
+}
+
+.nav-button {
+    color: #f4f4f4;
+}
+
+.navbar-toggler {
+    outline: none;
+}
+
+.logged-in {
+    color: #f4f4f4;
+    margin: 8px 2px;
+}
+
+
+/* Index */
+
+.index-lead {
+    padding: 1.2rem;
+}
+
+.weighted-lead {
+    font-weight: 700;
+}
