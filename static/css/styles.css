@@ -3,19 +3,21 @@
 /* Background */
 
 .bg {
-    background-color: #ffffff;
+    background-color: #020704;
     font-family: 'Cantarell', sans-serif;
+    color: #d7e7f0;
+    height: 100%;
 }
 
 
 /* Navbar */
 
 .nav-bg {
-    background-color: #080807;
+    background-color: #d49a60;
 }
 
 .nav-bg a {
-    color: #f4f4f4;
+    color: #020704;
     transition: all 0.35s ease-in-out;
     -moz-transition: all 0.35s ease-in-out;
     -webkit-transition: all 0.35s ease-in-out;
@@ -23,7 +25,7 @@
 }
 
 .nav-bg a:hover {
-    color: #cf7815;
+    color: rgb(80, 65, 121);
 }
 
 .nav-button {
@@ -35,12 +37,12 @@
 }
 
 .logged-in {
-    color: #f4f4f4;
+    color: #020704;
     margin: 8px 2px;
 }
 
 
-/* Index */
+/* Home */
 
 .index-lead {
     padding: 1.2rem;
@@ -48,4 +50,11 @@
 
 .weighted-lead {
     font-weight: 700;
+}
+
+
+/* Accounts */
+
+.table {
+    color: #d7e7f0;
 }
