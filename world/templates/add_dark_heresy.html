@@ -1,0 +1,73 @@
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %} {% block page_title %} | Add Dark Heresy {% endblock %} {% block content %}
+
+<section class="button-nav">
+    <div class="row mb-5">
+        <div class="col-12">
+            <a href="{% url 'world_home' %}" role="button" class="btn btn-warning" aria-disabled="false">Back</a>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+    <div class="col-12 text-center">
+        <h1>New Dark Heresy</h1>
+    </div>
+</div>
+
+<form role="form" method="post" id="new_base" action="{% url 'add_dark_heresy' %}">
+    <div class="form-group body-text">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-8 mb-0">
+                {{ dark_form.name|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ dark_form.max_fate_points|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2 offset-md-1 mb-0">
+                {{ dark_form.weapon_skill|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ dark_form.ballistic_skill|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ dark_form.strengh|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ dark_form.toughness|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ dark_form.agility|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2 offset-md-1 mb-0">
+                {{ dark_form.intelligence|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ dark_form.perception|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ dark_form.willpower|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ dark_form.fellowship|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ dark_form.influence|as_crispy_field }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12 text-center">
+                <input class="btn btn-success" id="submit_dark" name="commit" type="submit" value="Add Dark Heresy">
+            </div>
+        </div>
+        <br>
+    </div>
+</form>
+
+
+{% endblock %}

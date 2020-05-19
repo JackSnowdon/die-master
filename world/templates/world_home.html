@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load static %} {% block page_title %} | World Home {% endblock %} {% block content %}
+
+<section class="header mb-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2>World Home</h2>
+        </div>
+    </div>
+</section>
+
+<section class="owned-lists">
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <a href="{% url 'add_dark_heresy' %}" role="button" class="btn btn-success mb-3" aria-disabled="false">Add Dark Hersey</a>
+            <h3>Dark Heresy:</h3>
+            {% for sheet in dh %}
+            <h5>{{ sheet.name }}</h5>
+            {% endfor %}
+        </div>
+        <div class="col-md-6 col-12">
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
