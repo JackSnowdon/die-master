@@ -69,14 +69,17 @@ def registration(request):
         request, "registration.html", {"registration_form": registration_form}
     )
 
+
 @login_required
 def user_profile(request):
     """ Display user profile """
     user = User.objects.get(email=request.user.email)
     profile = user.profile
+    dh = profile.dh_sheets.all()
     return render(
-        request, "profile.html", {"user": user, "profile": profile}
+        request, "profile.html", {"user": user, "profile": profile, "dh": dh}
     )
+
 
 @login_required
 def admin_panel(request):
@@ -88,6 +91,7 @@ def admin_panel(request):
             request, "You Don't Have The Required Permissions", extra_tags="alert"
         )
         return redirect("world_index")
+        
 
 @login_required
 def change_staff_access(request, pk):

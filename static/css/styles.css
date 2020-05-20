@@ -13,7 +13,7 @@
 /* Navbar */
 
 .nav-bg {
-    background-color: #e2d4c6;
+    background-color: #6e5b45;
 }
 
 .nav-bg a {
@@ -97,4 +97,12 @@
 .sheet-list-delete {
     font-size: 15px;
     color: #862923;
+}
+
+
+/* Sheets */
+
+.dh-card-back {
+    background-image: linear-gradient(#593403, #1d1702);
+    border-radius: 2px;
 }

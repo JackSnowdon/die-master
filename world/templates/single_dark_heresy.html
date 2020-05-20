@@ -8,53 +8,38 @@
     </div>
 </section>
 
-
-<section class="stats">
-    <div class="row">
-        <div class="col-md-8 mb-0">
-            <h5>Name: {{ this_sheet.name }}</h5>
-        </div>
-        <div class="col-md-4 mb-0">
-            <h5>Fate Points: {{ this_sheet.max_fate_points }}</h5>
+<section class="sheet-header">
+    <div class="row mb-3">
+        <div class="col-12 text-center">
+            <h2>{{ this_sheet.name }}</h2>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-2 offset-md-1 mb-0">
-            <h5>Weapon Skill: {{ this_sheet.weapon_skill }}</h5>
-        </div>
-        <div class="col-md-2 mb-0">
-            <h5>Ballistic Skill: {{ this_sheet.ballistic_skill }}</h5>
-        </div>
-        <div class="col-md-2 mb-0">
-            <h5>Strengh: {{ this_sheet.strengh }}</h5>
-        </div>
-        <div class="col-md-2 mb-0">
-            <h5>Toughness: {{ this_sheet.toughness }}</h5>
-        </div>
-        <div class="col-md-2 mb-0">
-            <h5>Agility: {{ this_sheet.agility }}</h5>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2 offset-md-1 mb-0">
-            <h5>Intelligence: {{ this_sheet.intelligence }}</h5>
-        </div>
-        <div class="col-md-2 mb-0">
-            <h5>Perception: {{ this_sheet.perception }}</h5>
-        </div>
-        <div class="col-md-2 mb-0">
-            <h5>Willpower: {{ this_sheet.willpower }}</h5>
-        </div>
-        <div class="col-md-2 mb-0">
-            <h5>Fellowship: {{ this_sheet.fellowship }}</h5>
-        </div>
-        <div class="col-md-2 mb-0">
-            <h5>Influence: {{ this_sheet.influence }}</h5>
-        </div>
-    </div>
-
 </section>
 
+<section class="new-stats">
+    <div class="row mb-5">
+        <div class="col-md-6 col-12 dh-card-back">
+            <h4 class="mb-3">CHARACTERISTICS:</h4>
+            <div class="row mb-3 text-center">
+                <div class="col-6">
+                    <h5>Weapon Skill </br>{{ this_sheet.weapon_skill }}</h5>
+                    <h5>Ballistic Skill </br>{{ this_sheet.ballistic_skill }}</h5>
+                    <h5>Strengh </br>{{ this_sheet.strengh }}</h5>
+                    <h5>Toughness </br>{{ this_sheet.toughness }}</h5>
+                    <h5>Agility </br>{{ this_sheet.agility }}</h5>
+                </div>
+                <div class="col-6">
+                    <h5>Intelligence </br>{{ this_sheet.intelligence }}</h5>
+                    <h5>Perception </br>{{ this_sheet.perception }}</h5>
+                    <h5>Willpower </br>{{ this_sheet.willpower }}</h5>
+                    <h5>Fellowship </br>{{ this_sheet.fellowship }}</h5>
+                    <h5>Influence </br>{{ this_sheet.influence }} </h5>
+                </div>
+            </div>
+            <h5>Fate Points: {{ this_sheet.max_fate_points }}</h5>
+        </div>
+        <div class="col-md-6 col-12">
+        </div>
+</section>
 
 {% endblock %}
