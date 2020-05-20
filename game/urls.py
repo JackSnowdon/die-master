@@ -7,5 +7,5 @@ urlpatterns = [
     path(r'set_up_dark/<int:pk>', set_up_dark, name="set_up_dark"),
     path(r'delete_dark_heresy_game/<int:pk>', delete_dark_heresy_game, name="delete_dark_heresy_game"),
     path(r'change_dark_player_status/<int:pk>/<int:gamepk>', change_dark_player_status, name="change_dark_player_status"),
-    
+    path(r'change_ready_state/<int:pk>', change_ready_state, name="change_ready_state"),
 ]

@@ -16,10 +16,19 @@
 
 <section class="users">
     <div class="row mb-5">
-        <div class="col-12 mb-3">
+        <div class="col-6">
             <h3>Your DM Is: {{ this_game.dm }}</h3>
         </div>
+        <div class="col-6 text-center">
+            {% if this_game.ready_state == False %}
+            <h5>Game Not Ready</h5>
+            {% else %}
+            <h5>Game Ready</h5>
+            {% endif %} {% if this_game.dm == user.profile %}
+            <a href="{% url 'change_ready_state' this_game.id %}" role="button" class="btn btn-success" aria-disabled="false">Ready State</a>
+        </div> {% endif %}
     </div>
+    {% if this_game.ready_state == False %}
     <div class="row">
         <div class="col-md-6 col-12">
             <h3>Selected Players: </h3>
@@ -40,6 +49,19 @@
             </ul>
         </div>
     </div>
+    {% else %}
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h3>Selected Players: </h3>
+            <ul class="sheet-list">
+                {% for sheet in this_game.sheets.all %}
+                <li class="sheet-list-item">{{ sheet.name }} - <span class="small">{{ sheet.created_by }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
 </section>
 
 

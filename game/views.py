@@ -56,6 +56,25 @@ def change_dark_player_status(request, pk, gamepk):
 
 
 @login_required
+def change_ready_state(request, pk):
+    this_game = get_object_or_404(DarkHeresyGame, pk=pk)
+    profile = request.user.profile
+    if profile == this_game.dm:
+        if this_game.ready_state == False:
+            this_game.ready_state = True
+            messages.error(request, 'Set {0} to Ready'.format(this_game.name), extra_tags='alert')
+        else:
+            this_game.ready_state = False
+            messages.error(request, 'Unreadied {0}'.format(this_game.name), extra_tags='alert')
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+    this_game.save()
+    return redirect("set_up_dark", this_game.id)
+
+
+@login_required
 def delete_dark_heresy_game(request, pk):
     this_game = get_object_or_404(DarkHeresyGame, pk=pk)
     profile = request.user.profile
