@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
+from world.models import *
 
 # Create your views here.
 
@@ -30,7 +31,20 @@ def start_new_dark_game(request):
 @login_required
 def set_up_dark(request, pk):
     this_game = get_object_or_404(DarkHeresyGame, pk=pk)
-    return render(request, "set_up_dark.html", {"this_game": this_game})
+    dh_sheets = DarkHeresyBase.objects.order_by('name').filter(current_game=None)
+    return render(request, "set_up_dark.html", {"this_game": this_game, "dh_sheets": dh_sheets})
+
+
+@login_required
+def change_dark_player_status(request, pk, gamepk):
+    this_sheet = get_object_or_404(DarkHeresyBase, pk=pk)
+    this_game = get_object_or_404(DarkHeresyGame, pk=gamepk)
+    if this_sheet.current_game == None:
+        this_sheet.current_game = this_game
+    else:
+        this_sheet.current_game = None
+    this_sheet.save()
+    return redirect("set_up_dark", this_game.id)
 
 
 @login_required
