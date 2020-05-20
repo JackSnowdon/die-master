@@ -103,6 +103,9 @@
 /* Sheets */
 
 .dh-card-back {
-    background-image: linear-gradient(#593403, #1d1702);
-    border-radius: 2px;
+    background-image: linear-gradient(#211402, #1d1702);
+    border-radius: 1.25%;
+    border-width: 1px;
+    border-color: #282828;
+    border-style: solid;
 }
