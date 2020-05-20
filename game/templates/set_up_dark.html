@@ -25,7 +25,7 @@
             <h3>Selected Players: </h3>
             <ul class="sheet-list">
                 {% for sheet in this_game.sheets.all %}
-                <li class="sheet-list-item"><a href="{% url 'change_dark_player_status' sheet.id this_game.id %}" class="single_dark_heresy">{{ sheet.name }}</a>
+                <li class="sheet-list-item"><a href="{% url 'change_dark_player_status' sheet.id this_game.id %}" class="single_dark_heresy">{{ sheet.name }}</a> - <span class="small">{{ sheet.created_by }}</span>
                 </li>
                 {% endfor %}
             </ul>
@@ -33,10 +33,10 @@
         <div class="col-md-6 col-12">
             <h3>Unselected Players: </h3>
             <ul class="sheet-list">
-                {% for sheet in dh_sheets %}
-                <li class="sheet-list-item"><a href="{% url 'change_dark_player_status' sheet.id this_game.id %}" class="single_dark_heresy">{{ sheet.name }}</a>
+                {% for sheet in dh_sheets %} {% if sheet.created_by == user.profile or this_game.dm == user.profile %}
+                <li class="sheet-list-item"><a href="{% url 'change_dark_player_status' sheet.id this_game.id %}" class="single_dark_heresy">{{ sheet.name }}</a> - <span class="small">{{ sheet.created_by }}</span>
                 </li>
-                {% endfor %}
+                {% endif %} {% endfor %}
             </ul>
         </div>
     </div>

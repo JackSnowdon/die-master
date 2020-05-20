@@ -39,10 +39,18 @@ def set_up_dark(request, pk):
 def change_dark_player_status(request, pk, gamepk):
     this_sheet = get_object_or_404(DarkHeresyBase, pk=pk)
     this_game = get_object_or_404(DarkHeresyGame, pk=gamepk)
-    if this_sheet.current_game == None:
-        this_sheet.current_game = this_game
+    profile = request.user.profile
+    if profile == this_game.dm or this_sheet.created_by == profile: 
+        if this_sheet.current_game == None:
+            this_sheet.current_game = this_game
+            messages.error(request, 'Added {0} to {1}'.format(this_sheet.name, this_game.name), extra_tags='alert')
+        else:
+            this_sheet.current_game = None
+            messages.error(request, 'Removed {0} from {1}'.format(this_sheet.name, this_game.name), extra_tags='alert')
     else:
-        this_sheet.current_game = None
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
     this_sheet.save()
     return redirect("set_up_dark", this_game.id)
 
