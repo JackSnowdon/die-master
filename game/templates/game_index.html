@@ -11,7 +11,15 @@
 <section class="game-lists">
     <div class="row">
         <div class="col-md-6 col-12">
+            <a href="{% url 'start_new_dark_game' %}" role="button" class="btn btn-warning mb-3" aria-disabled="false">New Dark Heresy</a>
             <h4>Dark Heresy:</h4>
+            <ul class="sheet-list">
+                {% for sheet in dark_sheets %}
+                <li class="sheet-list-item"><a href="{% url 'set_up_dark' sheet.id %}" class="single_dark_heresy">{{ sheet.name }}</a>
+                    <a href="{% url 'delete_dark_heresy_game' sheet.id %}" class="sheet-list-delete" onclick="return confirm('Are you sure you to delete {{ sheet.name }}?');"><i class="fas fa-dumpster-fire"></i></a>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
         <div class="col-md-6 col-12">
 
