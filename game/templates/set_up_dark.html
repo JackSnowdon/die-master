@@ -78,6 +78,8 @@
             <a data-toggle="modal" href="#dmDieModel{{ sheet.id }}">
                 <h5>{{ sheet.name }}</h5>
             </a>
+            <p>Last Sent {{ sheet.die_roll.roll_type }}</p>
+            <p>{{ sheet.die_roll.roll_amount }}</p>
         </div>
 
 
@@ -97,8 +99,8 @@
                     <div class="modal-footer block-display">
                         <div class="row text-center">
                             <div class="col-12">
-                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'weapon_skill' %}" class="btn btn-outline-dark" id="wep-skill-roll">Wep Skill</a>
-                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'ballistic_skill' %}" class="btn btn-outline-dark" id="bal-skill-roll">Bal Skill</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'weapon skill' %}" class="btn btn-outline-dark" id="wep-skill-roll">Wep Skill</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'ballistic skill' %}" class="btn btn-outline-dark" id="bal-skill-roll">Bal Skill</a>
                                 <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'strengh' %}" class="btn btn-outline-dark" id="strengh-roll">Strengh</a>
                                 <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'toughness' %}" class="btn btn-outline-dark" id="toughtness-roll">Toughness</a>
                                 <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'agility' %}" class="btn btn-outline-dark" id="agility-roll">Agility</a>

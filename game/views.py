@@ -95,8 +95,13 @@ def send_dark_die_roll(request, gamepk, targetpk, rolltype):
     this_game = get_object_or_404(DarkHeresyGame, pk=gamepk)
     target = get_object_or_404(DarkHeresyBase, pk=targetpk)
     if profile == this_game.dm:
-        print(this_game, target, rolltype)
-        
+        die_form = DarkRollForm()
+        form = die_form.save(commit=False)
+        form.target_id = target.id
+        form.roll_type = rolltype.capitalize() 
+        form.save()
+        target.die_roll = get_object_or_404(DarkDieRoll, pk=form.id)
+        target.save()         
         return redirect("set_up_dark", this_game.id)
     else:
         messages.error(
