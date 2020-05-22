@@ -10,14 +10,18 @@
 
 <div class="row">
     <div class="col-12 text-center">
-        <h1>{{ this_game }} Setup</h1>
+        <h1>{{ this_game }} {% if this_game.ready_state == False %}Setup{% else %}Ready{% endif %}</h1>
     </div>
 </div>
 
-<section class="users">
+<section class="dm">
     <div class="row mb-5">
         <div class="col-6">
+            {% if this_game.dm == user.profile %}
+            <h3>Your're The DM!</h3>
+            {% else %}
             <h3>Your DM Is: {{ this_game.dm }}</h3>
+            {% endif %}
         </div>
         <div class="col-6 text-center">
             {% if this_game.ready_state == False %}
@@ -28,7 +32,11 @@
             <a href="{% url 'change_ready_state' this_game.id %}" role="button" class="btn btn-success" aria-disabled="false">Ready State</a>
         </div> {% endif %}
     </div>
-    {% if this_game.ready_state == False %}
+</section>
+
+{% if this_game.ready_state == False %}
+
+<section class="user-setup">
     <div class="row">
         <div class="col-md-6 col-12">
             <h3>Selected Players: </h3>
@@ -49,20 +57,45 @@
             </ul>
         </div>
     </div>
-    {% else %}
-    <div class="row">
-        <div class="col-md-6 col-12">
-            <h3>Selected Players: </h3>
-            <ul class="sheet-list">
-                {% for sheet in this_game.sheets.all %}
-                <li class="sheet-list-item">{{ sheet.name }} - <span class="small">{{ sheet.created_by }}</span>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-    {% endif %}
 </section>
 
+{% else %} {% if this_game.dm == user.profile %}
 
-{% endblock %}
+<section class="dm-ready">
+    <div class="row dm-tools">
+        <div class="col-12">
+            <h4>DM Tools:</h4>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3>Players:</h3>
+        </div>
+    </div>
+    <div class="row">
+        {% for sheet in this_game.sheets.all %}
+        <div class="col-md-4 col-6 text-center mb-3">
+            <h5>{{ sheet.name }}</h5>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% else %}
+
+<section class="user-ready">
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3>Players:</h3>
+        </div>
+    </div>
+    <div class="row">
+        {% for sheet in this_game.sheets.all %}
+        <div class="col-md-4 col-6 text-center mb-3">
+            <h5>{{ sheet.name }}</h5>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endif %} {% endif %} {% endblock %}

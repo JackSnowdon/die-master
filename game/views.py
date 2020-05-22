@@ -86,4 +86,5 @@ def delete_dark_heresy_game(request, pk):
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
         )
-        return redirect("game_index") 
+        return redirect("game_index")
+
