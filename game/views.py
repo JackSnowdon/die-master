@@ -88,3 +88,18 @@ def delete_dark_heresy_game(request, pk):
         )
         return redirect("game_index")
 
+
+@login_required
+def send_dark_die_roll(request, gamepk, targetpk, rolltype):
+    profile = request.user.profile
+    this_game = get_object_or_404(DarkHeresyGame, pk=gamepk)
+    target = get_object_or_404(DarkHeresyBase, pk=targetpk)
+    if profile == this_game.dm:
+        print(this_game, target, rolltype)
+        
+        return redirect("set_up_dark", this_game.id)
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+        return redirect("game_index")

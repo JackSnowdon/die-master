@@ -89,7 +89,7 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4>Choose Roll For {{ sheet.name }}</h4>
+                        <h4>Send Die Roll For {{ sheet.name }}</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
@@ -97,21 +97,20 @@
                     <div class="modal-footer block-display">
                         <div class="row text-center">
                             <div class="col-12">
-                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id="cancel-confirm">Close</button>
-                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id="attack-confirm">Attack</button>
-                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id="cancel-confirm">Close</button>
-                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id="attack-confirm">Attack</button>
-                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id="cancel-confirm">Close</button>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'weapon_skill' %}" class="btn btn-outline-dark" id="wep-skill-roll">Wep Skill</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'ballistic_skill' %}" class="btn btn-outline-dark" id="bal-skill-roll">Bal Skill</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'strengh' %}" class="btn btn-outline-dark" id="strengh-roll">Strengh</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'toughness' %}" class="btn btn-outline-dark" id="toughtness-roll">Toughness</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'agility' %}" class="btn btn-outline-dark" id="agility-roll">Agility</a>
                                 <hr>
-                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id="cancel-confirm">Close</button>
-                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id="attack-confirm">Attack</button>
-                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id="cancel-confirm">Close</button>
-                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id="attack-confirm">Attack</button>
-                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal" id="cancel-confirm">Close</button>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'intelligence' %}" class="btn btn-outline-dark" id="intel-roll">Intel</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'perception' %}" class="btn btn-outline-dark" id="percep-roll">Percep</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'willpower' %}" class="btn btn-outline-dark" id="willpower-roll">Willpower</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'fellowship' %}" class="btn btn-outline-dark" id="fellowship-roll">Fellowship</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'influence' %}" class="btn btn-outline-dark" id="influence-roll">Influence</a>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
