@@ -100,6 +100,22 @@
 }
 
 
+/* Game Model */
+
+.modal-content {
+    background-color: black;
+    border: 0.75px solid white;
+}
+
+.block-display {
+    display: block;
+}
+
+.btn-outline-dark {
+    color: #d7e7f0;
+}
+
+
 /* Sheets */
 
 .dh-card-back {
@@ -108,4 +124,14 @@
     border-width: 1px;
     border-color: #282828;
     border-style: solid;
+}
+
+
+/* Class Helpers */
+
+.btn {
+    transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
 }
