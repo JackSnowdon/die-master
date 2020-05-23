@@ -81,7 +81,8 @@
             <p>Last Sent {{ sheet.die_roll.roll_type|title }}</p>
             <p>{{ sheet.die_roll.roll_amount }}</p>
 
-            {% for die in die_game_rolls %} {% if die.target_id == sheet.id %}
+            <h5>Previous Rolls:</h5>
+            {% for die in this_game.all_game_rolls.all %} {% if die.target_id == sheet.id %}
             <p>{{ die.roll_type }}</p>
             {% endif %} {% endfor %}
         </div>
@@ -138,7 +139,11 @@
             <h4>{{ sheet.name }}</h4>
             {% if user.profile == sheet.created_by %}
             <p>{{ sheet.die_roll.roll_type|title }}</p>
-            {% endif %}
+
+            <h5 class="mb-3">Previous Rolls:</h5>
+            {% for die in this_game.all_game_rolls.all %} {% if die.target_id == sheet.id %}
+            <p>{{ die.roll_type }}</p>
+            {% endif %} {% endfor %} {% endif %}
         </div>
         {% endfor %}
     </div>

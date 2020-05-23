@@ -32,11 +32,7 @@ def start_new_dark_game(request):
 def set_up_dark(request, pk):
     this_game = get_object_or_404(DarkHeresyGame, pk=pk)
     dh_sheets = DarkHeresyBase.objects.order_by('name').filter(current_game=None)
-    if this_game.ready_state == False:
-        return render(request, "set_up_dark.html", {"this_game": this_game, "dh_sheets": dh_sheets})
-    else:
-        die_game_rolls = this_game.all_game_rolls.all
-        return render(request, "set_up_dark.html", {"this_game": this_game, "dh_sheets": dh_sheets, "die_game_rolls": die_game_rolls})
+    return render(request, "set_up_dark.html", {"this_game": this_game, "dh_sheets": dh_sheets})
 
 
 @login_required
