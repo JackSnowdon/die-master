@@ -18,9 +18,9 @@
     <div class="row mb-5">
         <div class="col-6">
             {% if this_game.dm == user.profile %}
-            <h3>Your're The DM!</h3>
+            <h3>You're The DM!</h3>
             {% else %}
-            <h3>Your DM Is: {{ this_game.dm }}</h3>
+            <h3>The DM Is: {{ this_game.dm }}</h3>
             {% endif %}
         </div>
         <div class="col-6 text-center">
@@ -78,13 +78,23 @@
             <a data-toggle="modal" href="#dmDieModel{{ sheet.id }}">
                 <h5>{{ sheet.name }}</h5>
             </a>
-            <p>Last Sent {{ sheet.die_roll.roll_type|title }}</p>
+
+            {% if user.profile == sheet.created_by %}
+            <p><a href="{% url 'dark_die_roll' sheet.die_roll.id %}">Current Roll: {{ sheet.die_roll.roll_type }}</a></p>
+            <h5 class="mb-3">Previous Rolls:</h5>
+            {% for die in this_game.all_game_rolls.all %} {% if die.target_id == sheet.id %}
+            <p>
+                <a href="{% url 'dark_die_roll' die.id %}">{{ die.roll_type }}</a>
+            </p>
+            {% endif %} {% endfor %} {% else %}
+
+            <p>Last Sent {{ sheet.die_roll.roll_type }}</p>
             <p>{{ sheet.die_roll.roll_amount }}</p>
 
             <h5>Previous Rolls:</h5>
             {% for die in this_game.all_game_rolls.all %} {% if die.target_id == sheet.id %}
             <p>{{ die.roll_type }}</p>
-            {% endif %} {% endfor %}
+            {% endif %} {% endfor %} {% endif %}
         </div>
 
 
@@ -104,17 +114,17 @@
                     <div class="modal-footer block-display">
                         <div class="row text-center">
                             <div class="col-12">
-                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'weapon_skill' %}" class="btn btn-outline-dark" id="wep-skill-roll">Wep Skill</a>
-                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'ballistic_skill' %}" class="btn btn-outline-dark" id="bal-skill-roll">Bal Skill</a>
-                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'strengh' %}" class="btn btn-outline-dark" id="strengh-roll">Strengh</a>
-                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'toughness' %}" class="btn btn-outline-dark" id="toughtness-roll">Toughness</a>
-                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'agility' %}" class="btn btn-outline-dark" id="agility-roll">Agility</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'Weapon Skill' %}" class="btn btn-outline-dark" id="wep-skill-roll">Wep Skill</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'Ballistic Skill' %}" class="btn btn-outline-dark" id="bal-skill-roll">Bal Skill</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'Strengh' %}" class="btn btn-outline-dark" id="strengh-roll">Strengh</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'Toughness' %}" class="btn btn-outline-dark" id="toughtness-roll">Toughness</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'Agility' %}" class="btn btn-outline-dark" id="agility-roll">Agility</a>
                                 <hr>
-                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'intelligence' %}" class="btn btn-outline-dark" id="intel-roll">Intel</a>
-                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'perception' %}" class="btn btn-outline-dark" id="percep-roll">Percep</a>
-                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'willpower' %}" class="btn btn-outline-dark" id="willpower-roll">Willpower</a>
-                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'fellowship' %}" class="btn btn-outline-dark" id="fellowship-roll">Fellowship</a>
-                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'influence' %}" class="btn btn-outline-dark" id="influence-roll">Influence</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'Intelligence' %}" class="btn btn-outline-dark" id="intel-roll">Intel</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'Perception' %}" class="btn btn-outline-dark" id="percep-roll">Percep</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'Willpower' %}" class="btn btn-outline-dark" id="willpower-roll">Willpower</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'Fellowship' %}" class="btn btn-outline-dark" id="fellowship-roll">Fellowship</a>
+                                <a type="button" href="{% url 'send_dark_die_roll' this_game.id sheet.id 'Influence' %}" class="btn btn-outline-dark" id="influence-roll">Influence</a>
                             </div>
                         </div>
                     </div>
@@ -135,14 +145,15 @@
     </div>
     <div class="row">
         {% for sheet in this_game.sheets.all %}
-        <div class="col-md-4 col-6 text-center mb-3">
+        <div class="col-md-4 col-12 text-center mb-5">
             <h4>{{ sheet.name }}</h4>
             {% if user.profile == sheet.created_by %}
-            <p>{{ sheet.die_roll.roll_type|title }}</p>
-
+            <p><a href="{% url 'dark_die_roll' sheet.die_roll.id %}">Current Roll: {{ sheet.die_roll.roll_type }}</a></p>
             <h5 class="mb-3">Previous Rolls:</h5>
             {% for die in this_game.all_game_rolls.all %} {% if die.target_id == sheet.id %}
-            <p>{{ die.roll_type }}</p>
+            <p>
+                <a href="{% url 'dark_die_roll' die.id %}">{{ die.roll_type }}</a>
+            </p>
             {% endif %} {% endfor %} {% endif %}
         </div>
         {% endfor %}

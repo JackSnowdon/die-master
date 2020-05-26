@@ -109,3 +109,9 @@ def send_dark_die_roll(request, gamepk, targetpk, rolltype):
             request, "You Don't Have The Required Permissions", extra_tags="alert"
         )
         return redirect("game_index")
+
+
+@login_required
+def dark_die_roll(request, diepk):
+    this_roll = get_object_or_404(DarkDieRoll, pk=diepk)
+    return render(request, "dark_die_roll.html", {"this_roll": this_roll})

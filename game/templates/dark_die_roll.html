@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %} {% block page_title %} | Roll {{ this_roll.roll_type }} {% endblock %} {% block content %}
+
+<section class="button-nav">
+    <div class="row mb-5">
+        <div class="col-12">
+            <a href="{% url 'set_up_dark' this_roll.roll_game.id %}" role="button" class="btn btn-warning" aria-disabled="false">Back</a>
+        </div>
+    </div>
+</section>
+
+<section class="die-roller">
+    <div class="row">
+        <div class="col-12">
+            <p>Roll Type: {{ this_roll.roll_type }}</p>
+        </div>
+    </div>
+</section> {% endblock %}
