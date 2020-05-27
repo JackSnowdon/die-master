@@ -79,8 +79,9 @@
                 <h5>{{ sheet.name }}</h5>
             </a>
 
-            {% if user.profile == sheet.created_by %}
+            {% if user.profile == sheet.created_by %} {% if user.die_roll != Null %}
             <p><a href="{% url 'dark_die_roll' sheet.die_roll.id %}">Current Roll: {{ sheet.die_roll.roll_type }}</a></p>
+            {% endif %}
             <h5 class="mb-3">Previous Rolls:</h5>
             {% for die in this_game.all_game_rolls.all %} {% if die.target_id == sheet.id %}
             <p>
@@ -96,7 +97,6 @@
             <p>{{ die.roll_type }}</p>
             {% endif %} {% endfor %} {% endif %}
         </div>
-
 
         <!-- DM MODEL -->
 
@@ -147,8 +147,9 @@
         {% for sheet in this_game.sheets.all %}
         <div class="col-md-4 col-12 text-center mb-5">
             <h4>{{ sheet.name }}</h4>
-            {% if user.profile == sheet.created_by %}
+            {% if user.profile == sheet.created_by %} {% if user.die_roll != Null %}
             <p><a href="{% url 'dark_die_roll' sheet.die_roll.id %}">Current Roll: {{ sheet.die_roll.roll_type }}</a></p>
+            {% endif %}
             <h5 class="mb-3">Previous Rolls:</h5>
             {% for die in this_game.all_game_rolls.all %} {% if die.target_id == sheet.id %}
             <p>
