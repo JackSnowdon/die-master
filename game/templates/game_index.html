@@ -15,7 +15,7 @@
             <h4>Dark Heresy:</h4>
             <ul class="sheet-list">
                 {% for sheet in dark_sheets %}
-                <li class="sheet-list-item"><a href="{% url 'set_up_dark' sheet.id %}" class="single_dark_heresy">{{ sheet.name }}</a> {% if sheet.ready_state == True %} <span class="ready-color">Game-Ready!</span> {% else %}
+                <li class="sheet-list-item"><a href="{% url 'set_up_dark' sheet.id %}" class="single-dark-heresy">{{ sheet.name }}</a> {% if sheet.ready_state == True %} <span class="ready-color">Game-Ready!</span> {% else %}
                     <a href="{% url 'delete_dark_heresy_game' sheet.id %}" class="sheet-list-delete" onclick="return confirm('Are you sure you to delete {{ sheet.name }}?');"><i class="fas fa-dumpster-fire"></i></a> {% endif %}
                 </li>
                 {% endfor %}
@@ -24,7 +24,6 @@
         <div class="col-md-6 col-12">
 
         </div>
-
     </div>
 </section>
 

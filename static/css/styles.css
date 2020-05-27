@@ -84,7 +84,7 @@
     color: white;
 }
 
-.single_dark_heresy {
+.single-dark-heresy {
     color: #d7e7f0;
 }
 
@@ -101,6 +101,34 @@
 
 .ready-color {
     color: green
+}
+
+
+/* Die */
+
+.die-link {
+    transition: all 0.15s ease-in-out;
+    -moz-transition: all 0.15s ease-in-out;
+    -webkit-transition: all 0.15s ease-in-out;
+    -o-transition: all 0.15s ease-in-out;
+    color: #40a54d;
+}
+
+.die-link:hover {
+    color: #1af137;
+    text-decoration: none;
+}
+
+.die-delete {
+    transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
+    color: #862923;
+}
+
+.die-delete:hover {
+    color: #fc2e1f;
 }
 
 

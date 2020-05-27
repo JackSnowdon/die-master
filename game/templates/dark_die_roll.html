@@ -3,7 +3,15 @@
 <section class="button-nav">
     <div class="row mb-5">
         <div class="col-12">
-            <a href="{% url 'set_up_dark' this_roll.roll_game.id %}" role="button" class="btn btn-warning" aria-disabled="false">Back</a>
+            <a href="{% url 'set_up_dark' this_roll.roll_game.id %}" role="button" class="btn btn-warning" aria-disabled="false">Back To {{ this_roll.roll_game }} </a>
+        </div>
+    </div>
+</section>
+
+<section class="die-header">
+    <div class="row">
+        <div class="col-12">
+            <h2>{{ this_roll.roll_type }} Roll for {{ roller }}</h2>
         </div>
     </div>
 </section>

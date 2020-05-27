@@ -112,6 +112,22 @@ def send_dark_die_roll(request, gamepk, targetpk, rolltype):
 
 
 @login_required
+def delete_dark_die_roll(request, diepk):
+    this_roll = get_object_or_404(DarkDieRoll, pk=diepk)
+    profile = request.user.profile
+    if profile == this_roll.roll_game.dm:
+        messages.error(request, 'Deleted {0}'.format(this_roll.roll_type), extra_tags='alert')
+        this_roll.delete()
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+    return redirect("set_up_dark", this_roll.roll_game.id)
+
+
+@login_required
 def dark_die_roll(request, diepk):
     this_roll = get_object_or_404(DarkDieRoll, pk=diepk)
-    return render(request, "dark_die_roll.html", {"this_roll": this_roll})
+    roller = get_object_or_404(DarkHeresyBase, pk=this_roll.target_id)
+    print(this_roll.roll_type)
+    return render(request, "dark_die_roll.html", {"this_roll": this_roll, "roller": roller})
