@@ -12,7 +12,7 @@
             <h3>Dark Heresy:</h3>
             <ul class="sheet-list">
                 {% for sheet in dh %}
-                <li class="sheet-list-item"><a href="{% url 'single_dark_heresy' sheet.id %}" class="single_dark_heresy">{{ sheet.name }}</a> <a href="{% url 'edit_dark_heresy' sheet.id %}" class=" sheet-list-edit"><i class="far fa-edit"></i></a>
+                <li class="sheet-list-item"><a href="{% url 'single_dark_heresy' sheet.id %}" class="single-dark-heresy">{{ sheet.name }}</a> <a href="{% url 'edit_dark_heresy' sheet.id %}" class=" sheet-list-edit"><i class="far fa-edit"></i></a>
                     <a href="{% url 'delete_dark_heresy' sheet.id %}" class="sheet-list-delete" onclick="return confirm('Are you sure you to delete {{ sheet.name }}?');"><i class="fas fa-dumpster-fire"></i></a>
                 </li>
                 {% endfor %}

@@ -42,7 +42,7 @@
             <h3>Selected Players: </h3>
             <ul class="sheet-list">
                 {% for sheet in this_game.sheets.all %}
-                <li class="sheet-list-item"><a href="{% url 'change_dark_player_status' sheet.id this_game.id %}" class="single_dark_heresy">{{ sheet.name }}</a> - <span class="small">{{ sheet.created_by }}</span>
+                <li class="sheet-list-item"><a href="{% url 'change_dark_player_status' sheet.id this_game.id %}" class="single-dark-heresy">{{ sheet.name }}</a> - <span class="small">{{ sheet.created_by }}</span>
                 </li>
                 {% endfor %}
             </ul>
@@ -51,7 +51,7 @@
             <h3>Unselected Players: </h3>
             <ul class="sheet-list">
                 {% for sheet in dh_sheets %} {% if sheet.created_by == user.profile or this_game.dm == user.profile %}
-                <li class="sheet-list-item"><a href="{% url 'change_dark_player_status' sheet.id this_game.id %}" class="single_dark_heresy">{{ sheet.name }}</a> - <span class="small">{{ sheet.created_by }}</span>
+                <li class="sheet-list-item"><a href="{% url 'change_dark_player_status' sheet.id this_game.id %}" class="single-dark-heresy">{{ sheet.name }}</a> - <span class="small">{{ sheet.created_by }}</span>
                 </li>
                 {% endif %} {% endfor %}
             </ul>
@@ -78,10 +78,10 @@
             <a data-toggle="modal" href="#dmDieModel{{ sheet.id }}" class="die-link">
                 <h5>{{ sheet.name }}</h5>
             </a>
-
             {% if user.profile == sheet.created_by %} {% if sheet.die_roll != Null %}
             <p>
-                <a href="{% url 'dark_die_roll' sheet.die_roll.id %}" class="die-link">Current Roll: {{ sheet.die_roll.roll_type }}</a>
+                Current Roll:
+                <a href="{% url 'dark_die_roll' sheet.die_roll.id %}" class="die-link">{{ sheet.die_roll.roll_type }}</a>
                 <a href="{% url 'delete_dark_die_roll' sheet.die_roll.id %}" class="die-delete" onclick="return confirm('Are you sure you to delete {{ sheet.die_roll.roll_type }} Roll?');"><i class="fas fa-dumpster-fire"></i></a>
             </p>
             {% endif %}
@@ -91,11 +91,13 @@
                 <a href="{% url 'dark_die_roll' die.id %}" class="die-link">{{ die.roll_type }}</a>
                 <a href="{% url 'delete_dark_die_roll' die.id %}" class="die-delete" onclick="return confirm('Are you sure you to delete {{ die.roll_type }} Roll?');"><i class="fas fa-dumpster-fire"></i></a>
             </p>
-            {% endif %} {% endfor %} {% else %}
-
+            {% endif %} {% endfor %} {% else %} {% if sheet.die_roll != Null %}
             <p>Last Sent {{ sheet.die_roll.roll_type }}
                 <a href="{% url 'delete_dark_die_roll' sheet.die_roll.id %}" class="die-delete" onclick="return confirm('Are you sure you to delete {{ sheet.die_roll.roll_type }} Roll?');"><i class="fas fa-dumpster-fire"></i></a>
             </p>
+            {% endif %}
+
+
             <p>{{ sheet.die_roll.roll_amount }}</p>
 
             <h5>Previous Rolls:</h5>
