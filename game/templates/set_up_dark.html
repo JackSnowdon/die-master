@@ -29,8 +29,8 @@
             {% else %}
             <h5>Game Ready</h5>
             {% endif %} {% if this_game.dm == user.profile %}
-            <a href="{% url 'change_ready_state' this_game.id %}" role="button" class="btn btn-success" aria-disabled="false">Ready State</a>
-        </div> {% endif %}
+            <a href="{% url 'change_ready_state' this_game.id %}" role="button" class="btn btn-success" aria-disabled="false">Change Ready State</a> {% endif %}
+        </div>
     </div>
 </section>
 
@@ -59,7 +59,11 @@
     </div>
 </section>
 
-{% else %} {% if this_game.dm == user.profile %}
+{% else %}
+
+<!-- DM View -->
+
+{% if this_game.dm == user.profile %}
 
 <section class="dm-ready">
     <div class="row dm-tools mb-5">
@@ -78,6 +82,9 @@
             <a data-toggle="modal" href="#dmDieModel{{ sheet.id }}" class="die-link">
                 <h5>{{ sheet.name }}</h5>
             </a>
+
+            <!-- DM Own Sheets View-->
+
             {% if user.profile == sheet.created_by %} {% if sheet.die_roll != Null %}
             <p>
                 Current Roll:
@@ -91,13 +98,15 @@
                 <a href="{% url 'dark_die_roll' die.id %}" class="die-link">{{ die.roll_type }}</a>
                 <a href="{% url 'delete_dark_die_roll' die.id %}" class="die-delete" onclick="return confirm('Are you sure you to delete {{ die.roll_type }} Roll?');"><i class="fas fa-dumpster-fire"></i></a>
             </p>
-            {% endif %} {% endfor %} {% else %} {% if sheet.die_roll != Null %}
+            {% endif %} {% endfor %}
+
+            <!-- User Sheet List -->
+
+            {% else %} {% if sheet.die_roll != Null %}
             <p>Last Sent {{ sheet.die_roll.roll_type }}
                 <a href="{% url 'delete_dark_die_roll' sheet.die_roll.id %}" class="die-delete" onclick="return confirm('Are you sure you to delete {{ sheet.die_roll.roll_type }} Roll?');"><i class="fas fa-dumpster-fire"></i></a>
             </p>
             {% endif %}
-
-
             <p>{{ sheet.die_roll.roll_amount }}</p>
 
             <h5>Previous Rolls:</h5>
@@ -145,6 +154,8 @@
 </section>
 
 {% else %}
+
+<!-- User View -->
 
 <section class="user-ready">
     <div class="row mb-5">

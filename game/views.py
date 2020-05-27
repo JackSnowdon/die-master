@@ -129,5 +129,10 @@ def delete_dark_die_roll(request, diepk):
 def dark_die_roll(request, diepk):
     this_roll = get_object_or_404(DarkDieRoll, pk=diepk)
     roller = get_object_or_404(DarkHeresyBase, pk=this_roll.target_id)
-    print(this_roll.roll_type)
-    return render(request, "dark_die_roll.html", {"this_roll": this_roll, "roller": roller})
+    rolltype = this_roll.roll_type.replace(" ", "_").lower()
+
+
+    return render(request, "dark_die_roll.html", {"this_roll": this_roll, "roller": roller, "rolltype": rolltype})
+
+
+    
