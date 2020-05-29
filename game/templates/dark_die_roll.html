@@ -8,6 +8,20 @@
     </div>
 </section>
 
+<section class="roller-stats">
+    <p id="rolltype">{{ rolltype }}</p>
+    <span id="wep-skill">{{ roller.weapon_skill }}</span>
+    <span id="bal-skill">{{ roller.ballistic_skill }}</span>
+    <span id="strengh">{{ roller.strengh }}</span>
+    <span id="toughness">{{ roller.toughness }}</span>
+    <span id="agility">{{ roller.agility }}</span>
+    <span id="intelligence">{{ roller.intelligence }}</span>
+    <span id="perception">{{ roller.perception }}</span>
+    <span id="willpower">{{ roller.willpower }}</span>
+    <span id="fellowship">{{ roller.fellowship }}</span>
+    <span id="influence">{{ roller.influence }}</span>
+</section>
+
 <section class="die-header">
     <div class="row">
         <div class="col-12">
@@ -20,6 +34,9 @@
     <div class="row">
         <div class="col-12">
             <p>Roll Type: {{ this_roll.roll_type }}</p>
+            <p id="roll-threshold"></p>
         </div>
     </div>
-</section> {% endblock %}
+</section> {% endblock %} {% block script_js %}
+<script type="text/javascript" src="{% static 'js/dark_roll.js' %}"></script>
+{% endblock %}

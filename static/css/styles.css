@@ -131,6 +131,10 @@
     color: #fc2e1f;
 }
 
+.roller-stats {
+    display: none;
+}
+
 
 /* Game Model */
 
