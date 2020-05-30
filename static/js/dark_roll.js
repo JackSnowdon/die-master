@@ -7,6 +7,8 @@ $(document).ready(function() {
     // Roller Object
 
     let roller = new Object();
+    let threshold = 0;
+    let pass = 0;
 
     // Setup Functions
 
@@ -22,17 +24,37 @@ $(document).ready(function() {
         roller.willpower = $("#willpower").text();
         roller.fellowship = $("#fellowship").text();
         roller.influence = $("#influence").text();
-        console.log(roller)
+        roller.max_fate_points = $("#max-fate-points").text();
     };
 
-    function getRollThresh(x) {
-        console.log(x)
-        console.log(roller[x])
-        $("#roll-threshold").text(roller[x])
+    function PrintRollThresh(x) {
+        threshold = roller[x];
+        $("#roll-threshold").text(threshold)
+    }
+
+    function getDiceRoll(x) {
+        return Math.floor(Math.random() * x) + 1;
+    }
+
+    function checkPrintWinner(thresh, result) {
+        if (result <= thresh) {
+            $("#pass-fail").text("PASSED!").css("color", "green");
+            pass = 1;
+        } else {
+            $("#pass-fail").text("FAILED!").css("color", "red");
+        }
     }
 
     getRollerStats()
+    PrintRollThresh(roller.rolltype)
 
-    getRollThresh(roller.rolltype)
+    $("#roll-button").click(function() {
+        $("#roll-button").attr("disabled", true);
+        let result = getDiceRoll(100);
+        setTimeout(function() {
+            $("#roll-result").text(result);
+            checkPrintWinner(threshold, result);
+        }, 750);
+    });
 
 });
