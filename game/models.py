@@ -20,6 +20,7 @@ class DarkDieRoll(models.Model):
     roll_amount = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], default=0)
     roll_game = models.ForeignKey(DarkHeresyGame, related_name='all_game_rolls', on_delete=models.CASCADE)
     passed = models.BooleanField(default=False)
+    fate_points = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], default=0)
 
     def __str__(self):
         return "{0} Die Roll For Id: {1}".format(self.roll_type, self.target_id)

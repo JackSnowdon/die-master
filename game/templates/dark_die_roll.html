@@ -64,11 +64,15 @@
                 <div class="form-group body-text">
                     {% csrf_token %}
                     <div class="form-row">
-                        <div class="form-group col-md-4 mb-0">
+                        <div class="form-group col-md-6 mb-0">
                             {{ roll_form.roll_amount|as_crispy_field }}
                         </div>
-                        <div class="form-group col-md-8 mb-0">
-                            <br>
+                        <div class="form-group col-md-6 mb-0">
+                            {{ roll_form.fate_points|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12">
                             <input class="btn btn-success" id="sumbit-dark-roller" name="commit" type="submit" value="Sumbit Roll Form">
                         </div>
                     </div>

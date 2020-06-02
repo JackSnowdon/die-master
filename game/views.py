@@ -100,6 +100,7 @@ def send_dark_die_roll(request, gamepk, targetpk, rolltype):
         form.target_id = target.id
         form.roll_type = rolltype
         form.roll_game = this_game
+        form.fate_points = target.max_fate_points
         form.save()
         target.die_roll = get_object_or_404(DarkDieRoll, pk=form.id)
         target.save()         
@@ -134,7 +135,7 @@ def dark_die_roll(request, diepk):
         roll_form = DarkRollRoller(request.POST, instance=this_roll)
         if roll_form.is_valid():
             form = roll_form.save(commit=False)
-            print(form.roll_amount)
+            print(form.roll_amount, form.fate_points)
             return redirect("set_up_dark", this_roll.roll_game.id)
     else: 
         roll_form = DarkRollRoller(instance=this_roll)
