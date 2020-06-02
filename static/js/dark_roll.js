@@ -40,21 +40,44 @@ $(document).ready(function() {
         if (result <= thresh) {
             $("#pass-fail").text("PASSED!").css("color", "green");
             pass = 1;
+
+            // SHOW DJANGO FUNCTION TO SAVE ROLL
         } else {
             $("#pass-fail").text("FAILED!").css("color", "red");
+            if (roller.max_fate_points > 0) {
+                $("#reroll-button").attr("disabled", false);
+                $("#reroll-promt").text("Spend a fate point to roll again?")
+                $("#reroll-button").show()
+            }
         }
     }
 
-    getRollerStats()
-    PrintRollThresh(roller.rolltype)
+    function fatePointChecker() {
 
-    $("#roll-button").click(function() {
+    }
+
+    function dieRoll() {
         $("#roll-button").attr("disabled", true);
         let result = getDiceRoll(100);
         setTimeout(function() {
             $("#roll-result").text(result);
             checkPrintWinner(threshold, result);
         }, 750);
+    }
+
+    getRollerStats()
+    PrintRollThresh(roller.rolltype)
+
+    $("#roll-button").click(function() {
+        dieRoll();
+    });
+
+    $("#reroll-button").click(function() {
+        $("#reroll-button").attr("disabled", true);
+        roller.max_fate_points--;
+        $("#max-fate-points").text(roller.max_fate_points)
+        $("#pass-fail").empty()
+        dieRoll();
     });
 
 });
