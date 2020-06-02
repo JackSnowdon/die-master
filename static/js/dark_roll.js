@@ -40,20 +40,18 @@ $(document).ready(function() {
         if (result <= thresh) {
             $("#pass-fail").text("PASSED!").css("color", "green");
             pass = 1;
+            $("#passed-roll").show()
 
             // SHOW DJANGO FUNCTION TO SAVE ROLL
         } else {
             $("#pass-fail").text("FAILED!").css("color", "red");
+            $("#failed-roll").show()
             if (roller.max_fate_points > 0) {
                 $("#reroll-button").attr("disabled", false);
                 $("#reroll-promt").text("Spend a fate point to roll again?")
                 $("#reroll-button").show()
             }
         }
-    }
-
-    function fatePointChecker() {
-
     }
 
     function dieRoll() {
@@ -73,6 +71,7 @@ $(document).ready(function() {
     });
 
     $("#reroll-button").click(function() {
+        $("#failed-roll").hide();
         $("#reroll-button").attr("disabled", true);
         roller.max_fate_points--;
         $("#max-fate-points").text(roller.max_fate_points)

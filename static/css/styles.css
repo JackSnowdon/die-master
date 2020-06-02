@@ -132,7 +132,9 @@
 }
 
 #reroll-button,
-.roller-stats {
+.roller-stats,
+#passed-roll,
+#failed-roll {
     display: none;
 }
 
