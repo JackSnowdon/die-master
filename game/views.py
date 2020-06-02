@@ -129,8 +129,16 @@ def delete_dark_die_roll(request, diepk):
 def dark_die_roll(request, diepk):
     this_roll = get_object_or_404(DarkDieRoll, pk=diepk)
     roller = get_object_or_404(DarkHeresyBase, pk=this_roll.target_id)
-    rolltype = this_roll.roll_type.replace(" ", "_").lower() 
-    return render(request, "dark_die_roll.html", {"this_roll": this_roll, "roller": roller, "rolltype": rolltype})
+    rolltype = this_roll.roll_type.replace(" ", "_").lower()
+    if request.method == "POST":
+        roll_form = DarkRollRoller(request.POST, instance=this_roll)
+        if roll_form.is_valid():
+            form = roll_form.save(commit=False)
+            print(form.roll_amount)
+            return redirect("set_up_dark", this_roll.roll_game.id)
+    else: 
+        roll_form = DarkRollRoller(instance=this_roll)
+        return render(request, "dark_die_roll.html", {"this_roll": this_roll, "roller": roller, "rolltype": rolltype, "roll_form": roll_form})
 
 
 @login_required

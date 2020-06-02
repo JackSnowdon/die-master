@@ -41,8 +41,6 @@ $(document).ready(function() {
             $("#pass-fail").text("PASSED!").css("color", "green");
             pass = 1;
             $("#passed-roll").show()
-
-            // SHOW DJANGO FUNCTION TO SAVE ROLL
         } else {
             $("#pass-fail").text("FAILED!").css("color", "red");
             $("#failed-roll").show()
@@ -58,6 +56,8 @@ $(document).ready(function() {
         $("#roll-button").attr("disabled", true);
         let result = getDiceRoll(100);
         setTimeout(function() {
+            $("#sumbit-dark-roller").show();
+            $("#id_roll_amount").attr("value", result);
             $("#roll-result").text(result);
             checkPrintWinner(threshold, result);
         }, 750);
@@ -78,5 +78,9 @@ $(document).ready(function() {
         $("#pass-fail").empty()
         dieRoll();
     });
+
+
+
+    // $("#lose-test").attr("href", "{% url 'dark_die_result' this_roll.id " + result + " %}").addClass("btn btn-warning"); TEST
 
 });

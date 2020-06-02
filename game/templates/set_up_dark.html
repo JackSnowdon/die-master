@@ -119,7 +119,8 @@
                 {% if die.passed == True %}
                 <span>{{ die.roll_type }} Passed
                 </span> {% else %}
-                <a href="{% url 'dark_die_roll' die.id %}" class="die-link">{{ die.roll_type }}</a> {% endif %}
+                <a href="{% url 'dark_die_roll' die.id %}" class="die-link">{{ die.roll_type }}</a>
+                <a href="{% url 'delete_dark_die_roll' die.id %}" class="die-delete" onclick="return confirm('Are you sure you to delete {{ die.roll_type }} Roll?');"><i class="fas fa-dumpster-fire"></i></a> {% endif %}
             </div>
             {% endif %} {% endfor %} {% endif %}
         </div>
