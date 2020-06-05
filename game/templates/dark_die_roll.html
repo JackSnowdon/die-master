@@ -59,15 +59,23 @@
 
 <section class="roll-form">
     <div class="row">
+        <div class="col-md-4 col-12"></div>
+        <div class="col-md-4 col-12"></div>
+        <div class="col-md-4 col-12"></div>
+    </div>
+    <div class="row">
         <div class="col-12">
             <form role="form" method="post" id="dark-roller">
                 <div class="form-group body-text">
                     {% csrf_token %}
                     <div class="form-row">
-                        <div class="form-group col-md-6 mb-0">
+                        <div class="form-group col-md-4 mb-0">
+                            {{ roll_form.threshold|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
                             {{ roll_form.roll_amount|as_crispy_field }}
                         </div>
-                        <div class="form-group col-md-6 mb-0">
+                        <div class="form-group col-md-2 mb-0">
                             {{ roll_form.fate_points|as_crispy_field }}
                         </div>
                     </div>

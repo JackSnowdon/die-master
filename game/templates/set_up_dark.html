@@ -8,13 +8,12 @@
     </div>
 </section>
 
-<div class="row">
-    <div class="col-12 text-center">
-        <h1>{{ this_game }} {% if this_game.ready_state == False %}Setup{% else %}Ready{% endif %}</h1>
+<section class="header">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>{{ this_game }} {% if this_game.ready_state == False %}Setup{% else %}Ready{% endif %}</h1>
+        </div>
     </div>
-</div>
-
-<section class="dm">
     <div class="row mb-5">
         <div class="col-6">
             {% if this_game.dm == user.profile %}
@@ -125,7 +124,7 @@
             {% endif %} {% endfor %} {% endif %}
         </div>
 
-        <!-- DM MODEL -->
+        <!-- DM SEND DIE MODEL -->
 
         <div class="modal" id="dmDieModel{{ sheet.id }}">
             <div class="modal-dialog">
@@ -155,6 +154,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
