@@ -135,6 +135,9 @@ def dark_die_roll(request, diepk):
         roll_form = DarkRollRoller(request.POST, instance=this_roll)
         if roll_form.is_valid():
             form = roll_form.save(commit=False)
+            if form.roll_amount <= form.threshold:
+                form.passed = True
+            form.save()
             print(form.threshold, form.roll_amount, form.fate_points)
             return redirect("set_up_dark", this_roll.roll_game.id)    
     else: 

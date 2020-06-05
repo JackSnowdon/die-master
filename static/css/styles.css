@@ -141,6 +141,14 @@
     display: none;
 }
 
+.passed-roll-color {
+    color: #ffc107;
+}
+
+.failed-roll-color {
+    color: #fc2e1f;
+}
+
 
 /* Game Model */
 
