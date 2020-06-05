@@ -68,6 +68,7 @@
     <div class="row dm-tools mb-5">
         <div class="col-12">
             <h4>DM Tools:</h4>
+            <a href="{% url 'delete_all_dark_rolls' this_game.id %}" role="button" class="btn btn-danger" aria-disabled="false" onclick="return confirm('Are you sure you to delete all completed rolls?');">Delete Completed Rolls</a>
         </div>
     </div>
     <div class="row mb-5">

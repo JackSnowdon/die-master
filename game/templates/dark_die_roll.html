@@ -75,29 +75,6 @@
     </div>
 </section>
 
-<!--
-<section class="roll-links">
-    <div class="row text-center">
-        <div class="col-12 col-md-6">
-            <a href="{% url 'dark_die_result' this_roll.id 1 %}" id="passed-roll" role="button" class="btn btn-warning" aria-disabled="false">Return</a>
-        </div>
-        <div class="col-12 col-md-6">
-            <a href="{% url 'dark_die_result' this_roll.id 0 %}" id="failed-roll" role="button" class="btn btn-warning" aria-disabled="false">Return</a>
-        </div>
-    </div>
-</section>
--->
-
-<section class="roll-form">
-    <div class="row">
-        <div class="col-md-4 col-12"></div>
-        <div class="col-md-4 col-12"></div>
-        <div class="col-md-4 col-12"></div>
-    </div>
-
-</section>
-
-
 {% endblock %} {% block script_js %}
 <script type="text/javascript" src="{% static 'js/dark_roll.js' %}"></script>
 {% endblock %}

@@ -148,12 +148,19 @@ def dark_die_roll(request, diepk):
 
 
 @login_required
-def dark_die_result(request, diepk, result):
-    this_roll = get_object_or_404(DarkDieRoll, pk=diepk)
-    roller = get_object_or_404(DarkHeresyBase, pk=this_roll.target_id)
-    if result == 1:
-        this_roll.passed = True
-    this_roll.save()
-    return redirect("set_up_dark", this_roll.roll_game.id)
-
-    
+def delete_all_dark_rolls(request, pk):
+    this_game = get_object_or_404(DarkHeresyGame, pk=pk)
+    profile = request.user.profile
+    if profile == this_game.dm:
+        rolls = this_game.all_game_rolls.all()
+        for r in rolls:
+            if r.roll_amount != 0 or r.passed:
+                r.delete()
+            messages.error(
+            request, "All Completed Rolls Deleted", extra_tags="alert"
+        )
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+    return redirect("set_up_dark", this_game.id)   
