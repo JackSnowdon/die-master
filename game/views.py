@@ -43,6 +43,7 @@ def change_dark_player_status(request, pk, gamepk):
     if profile == this_game.dm or this_sheet.created_by == profile: 
         if this_sheet.current_game == None:
             this_sheet.current_game = this_game
+            this_sheet.current_fate_points = this_sheet.max_fate_points
             messages.error(request, 'Added {0} to {1}'.format(this_sheet.name, this_game.name), extra_tags='alert')
         else:
             this_sheet.current_game = None
@@ -100,7 +101,7 @@ def send_dark_die_roll(request, gamepk, targetpk, rolltype):
         form.target_id = target.id
         form.roll_type = rolltype
         form.roll_game = this_game
-        form.fate_points = target.max_fate_points
+        form.fate_points = target.current_fate_points
         form.save()
         target.die_roll = get_object_or_404(DarkDieRoll, pk=form.id)
         target.save()         
@@ -137,8 +138,9 @@ def dark_die_roll(request, diepk):
             form = roll_form.save(commit=False)
             if form.roll_amount <= form.threshold:
                 form.passed = True
+            roller.current_fate_points = form.fate_points
+            roller.save()
             form.save()
-            print(form.threshold, form.roll_amount, form.fate_points)
             return redirect("set_up_dark", this_roll.roll_game.id)    
     else: 
         roll_form = DarkRollRoller(instance=this_roll)

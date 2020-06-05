@@ -18,6 +18,7 @@ class DarkHeresyBase(models.Model):
     fellowship = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], default=0)
     influence = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], default=0)
     max_fate_points = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], default=0)
+    current_fate_points = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], default=0)
     created_by = models.ForeignKey(Profile, related_name='dh_sheets', on_delete=models.PROTECT)
     current_game = models.ForeignKey(DarkHeresyGame, related_name='sheets', on_delete=models.SET_NULL, blank=True,
         null=True)
