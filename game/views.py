@@ -135,12 +135,8 @@ def dark_die_roll(request, diepk):
         roll_form = DarkRollRoller(request.POST, instance=this_roll)
         if roll_form.is_valid():
             form = roll_form.save(commit=False)
-            print(form.roll_amount, form.fate_points, form.threshold)
-        else:
-            messages.error(
-                request, "IT BROKE", extra_tags="alert"
-            )
-        return redirect("set_up_dark", this_roll.roll_game.id)
+            print(form.threshold, form.roll_amount, form.fate_points)
+            return redirect("set_up_dark", this_roll.roll_game.id)    
     else: 
         roll_form = DarkRollRoller(instance=this_roll)
         return render(request, "dark_die_roll.html", {"this_roll": this_roll, "roller": roller, "rolltype": rolltype, "roll_form": roll_form})

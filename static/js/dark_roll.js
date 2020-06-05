@@ -84,9 +84,9 @@ $(document).ready(function() {
 
     // Working With Django Forms
 
-    $("#id_threshold").attr("disabled", true);
-    $("#id_fate_points").attr("disabled", true);
-    $("#id_roll_amount").attr("disabled", true);
+    //$("#id_threshold").attr("disabled", true);
+    //$("#id_fate_points").attr("disabled", true);
+    // $("#id_roll_amount").attr("disabled", true);
 
 
     // $("#lose-test").attr("href", "{% url 'dark_die_result' this_roll.id " + result + " %}").addClass("btn btn-warning"); TEST
