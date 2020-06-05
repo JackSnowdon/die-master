@@ -8,7 +8,6 @@ $(document).ready(function() {
 
     let roller = new Object();
     let threshold = 0;
-    let pass = 0;
 
     // Setup Functions
 
@@ -28,7 +27,7 @@ $(document).ready(function() {
     };
 
     function PrintRollThresh(x) {
-        let threshold = roller[x];
+        threshold = roller[x];
         console.log(threshold)
         $("#id_threshold").attr("value", threshold);
         $("#roll-threshold").text(threshold)
@@ -39,13 +38,12 @@ $(document).ready(function() {
     }
 
     function checkPrintWinner(thresh, result) {
+        $("#dark-roll-sumbit").show()
+        $("#sumbit-dark-roller").attr("disabled", false);
         if (result <= thresh) {
             $("#pass-fail").text("PASSED!").css("color", "green");
-            pass = 1;
-            $("#passed-roll").show()
         } else {
             $("#pass-fail").text("FAILED!").css("color", "red");
-            $("#failed-roll").show()
             if (roller.max_fate_points > 0) {
                 $("#reroll-button").attr("disabled", false);
                 $("#reroll-promt").text("Spend a fate point to roll again?")
@@ -73,10 +71,12 @@ $(document).ready(function() {
     });
 
     $("#reroll-button").click(function() {
-        $("#failed-roll").hide();
+        $("#sumbit-dark-roller").attr("disabled", true);
         $("#reroll-button").attr("disabled", true);
         roller.max_fate_points--;
-        $("#max-fate-points").text(roller.max_fate_points)
+        let currentFP = roller.max_fate_points
+        $("#max-fate-points").text(currentFP);
+        $("#id_fate_points").attr("value", currentFP);
         $("#pass-fail").empty()
         dieRoll();
     });
@@ -84,9 +84,11 @@ $(document).ready(function() {
 
     // Working With Django Forms
 
+    // DOING THIS DISABLES DJANGO FROM ACCEPTING THE FORM
+
     //$("#id_threshold").attr("disabled", true);
     //$("#id_fate_points").attr("disabled", true);
-    // $("#id_roll_amount").attr("disabled", true);
+    //$("#id_roll_amount").attr("disabled", true);
 
 
     // $("#lose-test").attr("href", "{% url 'dark_die_result' this_roll.id " + result + " %}").addClass("btn btn-warning"); TEST

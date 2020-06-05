@@ -135,7 +135,9 @@
 #reroll-button,
 .roller-stats,
 #passed-roll,
-#failed-roll {
+#failed-roll,
+#dark-roll-fields,
+#dark-roll-sumbit {
     display: none;
 }
 

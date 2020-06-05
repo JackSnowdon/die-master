@@ -33,42 +33,27 @@
 <section class="die-roller mb-3">
     <div class="row text-center">
         <div class="col-md-6 col-12">
-            <h4>{{ this_roll.roll_type }}: <span id="roll-threshold"></span></h4>
-            <h3 id="pass-fail"></h3>
+            <h3>{{ this_roll.roll_type }}: <span id="roll-threshold"></span></h3>
+            <h4 id="pass-fail"></h4>
         </div>
         <div class="col-md-6 col-12">
-            <h4 class="mb-3">Result: <span id="roll-result"></span></h4>
+            <h3 class="mb-3"><span id="roll-result"></span></h3>
             <button class="btn btn-success mb-3" id="roll-button">Roll D100</button>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-12">
             <p>Fate Points Left: <span id="max-fate-points">{{ roller.max_fate_points }}</span></p>
             <p id="reroll-promt"></p>
             <button class="btn btn-success mb-3" id="reroll-button">Re Roll</button>
         </div>
-    </div>
-</section>
-
-<section class="roll-links">
-    <div class="row text-center">
-        <div class="col-12 col-md-6">
-            <a href="{% url 'dark_die_result' this_roll.id 1 %}" id="passed-roll" role="button" class="btn btn-warning" aria-disabled="false">Return</a>
-        </div>
-        <div class="col-12 col-md-6">
-            <a href="{% url 'dark_die_result' this_roll.id 0 %}" id="failed-roll" role="button" class="btn btn-warning" aria-disabled="false">Return</a>
-        </div>
-    </div>
-</section>
-
-<section class="roll-form">
-    <div class="row">
-        <div class="col-md-4 col-12"></div>
-        <div class="col-md-4 col-12"></div>
-        <div class="col-md-4 col-12"></div>
     </div>
     <div class="row">
         <div class="col-12">
             <form role="form" method="post" id="dark-roller">
                 <div class="form-group body-text">
                     {% csrf_token %}
-                    <div class="form-row">
+                    <div class="form-row" id="dark-roll-fields">
                         <div class="form-group col-md-4 mb-0">
                             {{ roll_form.threshold|as_crispy_field }}
                         </div>
@@ -79,15 +64,37 @@
                             {{ roll_form.fate_points|as_crispy_field }}
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-12">
-                            <input class="btn btn-success" id="sumbit-dark-roller" name="commit" type="submit" value="Sumbit Roll Form">
+                    <div class="form-row" id="dark-roll-sumbit">
+                        <div class="form-group col-12 text-center">
+                            <input class="btn btn-success" id="sumbit-dark-roller" name="commit" type="submit" value="Sumbit Roll">
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+</section>
+
+<!--
+<section class="roll-links">
+    <div class="row text-center">
+        <div class="col-12 col-md-6">
+            <a href="{% url 'dark_die_result' this_roll.id 1 %}" id="passed-roll" role="button" class="btn btn-warning" aria-disabled="false">Return</a>
+        </div>
+        <div class="col-12 col-md-6">
+            <a href="{% url 'dark_die_result' this_roll.id 0 %}" id="failed-roll" role="button" class="btn btn-warning" aria-disabled="false">Return</a>
+        </div>
+    </div>
+</section>
+-->
+
+<section class="roll-form">
+    <div class="row">
+        <div class="col-md-4 col-12"></div>
+        <div class="col-md-4 col-12"></div>
+        <div class="col-md-4 col-12"></div>
+    </div>
+
 </section>
 
 
