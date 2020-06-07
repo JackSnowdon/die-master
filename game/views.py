@@ -163,4 +163,18 @@ def delete_all_dark_rolls(request, pk):
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
         )
-    return redirect("set_up_dark", this_game.id)   
+    return redirect("set_up_dark", this_game.id)
+
+
+@login_required
+def send_all_dark_roll(request, pk):
+    this_game = get_object_or_404(DarkHeresyGame, pk=pk)
+    profile = request.user.profile
+    if profile == this_game.dm:
+        sheets = this_game.sheets.all()
+        print(sheets)
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+    return redirect("set_up_dark", this_game.id)
