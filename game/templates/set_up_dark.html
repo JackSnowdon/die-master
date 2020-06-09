@@ -71,14 +71,16 @@
             <a href="{% url 'delete_all_dark_rolls' this_game.id %}" role="button" class="btn btn-danger" aria-disabled="false" onclick="return confirm('Are you sure you to delete all completed rolls?');">Delete Completed Rolls</a>
         </div>
         <div class="col-6">
-            <a href="{% url 'send_all_dark_roll' this_game.id %}" role="button" class="btn btn-warning" aria-disabled="false">Send All Rolls</a>
+            <a data-toggle="modal" href="#send-all-model" class="btn btn-warning">Send All Rolls</a>
         </div>
     </div>
+
     <div class="row mb-5">
         <div class="col-12">
             <h3>Players:</h3>
         </div>
     </div>
+
     <div class="row">
         {% for sheet in this_game.sheets.all %}
         <div class="col-md-4 col-6 text-center mb-3">
@@ -161,13 +163,45 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
 </section>
+
+<!-- All Die Roll Model-->
+<div class="modal" id="send-all-model">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4>Send Die Roll For All Sheets</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer block-display">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <a type="button" href="{% url 'send_all_dark_roll' this_game.id 'Weapon Skill' %}" class="btn btn-outline-dark" id="all-wep-skill-roll">Wep Skill</a>
+                        <a type="button" href="{% url 'send_all_dark_roll' this_game.id 'Ballistic Skill' %}" class="btn btn-outline-dark" id="all-bal-skill-roll">Bal Skill</a>
+                        <a type="button" href="{% url 'send_all_dark_roll' this_game.id 'Strengh' %}" class="btn btn-outline-dark" id="all-strengh-roll">Strengh</a>
+                        <a type="button" href="{% url 'send_all_dark_roll' this_game.id 'Toughness' %}" class="btn btn-outline-dark" id="all-toughtness-roll">Toughness</a>
+                        <a type="button" href="{% url 'send_all_dark_roll' this_game.id 'Agility' %}" class="btn btn-outline-dark mb-1" id="all-agility-roll">Agility</a>
+                        <hr>
+                        <a type="button" href="{% url 'send_all_dark_roll' this_game.id 'Intelligence' %}" class="btn btn-outline-dark" id="all-intel-roll">Intel</a>
+                        <a type="button" href="{% url 'send_all_dark_roll' this_game.id 'Perception' %}" class="btn btn-outline-dark" id="all-percep-roll">Percep</a>
+                        <a type="button" href="{% url 'send_all_dark_roll' this_game.id 'Willpower' %}" class="btn btn-outline-dark" id="all-willpower-roll">Willpower</a>
+                        <a type="button" href="{% url 'send_all_dark_roll' this_game.id 'Fellowship' %}" class="btn btn-outline-dark" id="all-fellowship-roll">Fellowship</a>
+                        <a type="button" href="{% url 'send_all_dark_roll' this_game.id 'Influence' %}" class="btn btn-outline-dark" id="all-influence-roll">Influence</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% else %}
 
