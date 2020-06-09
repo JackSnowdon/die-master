@@ -8,6 +8,7 @@ $(document).ready(function() {
 
     let roller = new Object();
     let threshold = 0;
+    let mod = $("#threshold").text();
 
     // Setup Functions
 
@@ -27,8 +28,8 @@ $(document).ready(function() {
     };
 
     function PrintRollThresh(x) {
-        threshold = roller[x];
-        console.log(threshold)
+        let base = roller[x];
+        threshold = parseInt(mod, 10) + parseInt(base, 10);
         $("#id_threshold").attr("value", threshold);
         $("#roll-threshold").text(threshold)
     }
@@ -63,8 +64,12 @@ $(document).ready(function() {
         }, 750);
     }
 
+    /* Roll Flow */
+
     getRollerStats()
     PrintRollThresh(roller.rolltype)
+
+    /* Roll Buttons */
 
     $("#roll-button").click(function() {
         dieRoll();
