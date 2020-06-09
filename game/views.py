@@ -191,3 +191,13 @@ def send_all_dark_roll(request, pk, rolltype):
             request, "You Don't Have The Required Permissions", extra_tags="alert"
         )
     return redirect("set_up_dark", this_game.id)
+
+
+@login_required
+def test_dark_roll(request, pk):
+    this_game = get_object_or_404(DarkHeresyGame, pk=pk)
+    if request.method == "POST":
+        mod = request.POST.get("mod")
+        print(mod)
+        die_form = DarkRollForm()
+    return redirect("set_up_dark", this_game.id)

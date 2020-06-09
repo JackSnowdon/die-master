@@ -100,6 +100,34 @@
             </p>
             {% endif %}
             <p>{{ sheet.die_roll.roll_amount }}</p>
+
+
+
+            <!-- Test Area For New Form -->
+
+            <form role="form" method="post" id="test_dark_roll" action="{% url 'test_dark_roll' this_game.id %}">
+                <div class="form-group body-text">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-12">
+                            <input name="mod" type="range" min="-30" max="30" step="10" class="slider" /><span class="mod-label">0</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <input class="btn btn-success" id="submit_test" name="commit" type="submit" value="Test Roll">
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </form>
+
+
+
+
+
+
             <h5>Previous Rolls:</h5>
             {% for die in this_game.all_game_rolls.all %} {% if die.target_id == sheet.id %}
             <div class="col-12">
@@ -238,4 +266,6 @@
     </div>
 </section>
 
-{% endif %} {% endif %} {% endblock %}
+{% endif %} {% endif %} {% endblock %} {% block script_js %}
+<script type="text/javascript" src="{% static 'js/test_roll.js' %}"></script>
+{% endblock %}
