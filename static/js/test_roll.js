@@ -10,4 +10,10 @@ $(document).ready(function() {
         $(this).html(value);
     });
 
+    $(".rolltype-button").click(function() {
+        var rolltype = $(this).attr('value');
+        console.log(rolltype)
+        $("#test-roll-type").attr('value', rolltype);
+    });
+
 });

@@ -105,23 +105,59 @@
 
             <!-- Test Area For New Form -->
 
-            <form role="form" method="post" id="test_dark_roll" action="{% url 'test_dark_roll' this_game.id %}">
-                <div class="form-group body-text">
-                    {% csrf_token %}
-                    <div class="form-row">
-                        <div class="col-12">
-                            <input name="mod" type="range" min="-30" max="30" step="10" class="slider" /><span class="mod-label">0</span>
+
+            <a data-toggle="modal" href="#test-die-model" class="die-link">
+                <h5>Test Die</h5>
+            </a>
+
+            <div class="modal" id="test-die-model">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4>Send Die Roll For {{ sheet.name }}</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <form role="form" method="post" id="test_dark_roll" action="{% url 'test_dark_roll' this_game.id %}">
+                                <div class="form-group body-text">
+                                    {% csrf_token %}
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            <input type="text" id="test-roll-type" name="rolltype">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row text-center">
+                                        <div class="col-12">
+                                            <a class="btn btn-outline-dark rolltype-button" id="test-wep-skill-roll" value="Weapon Skill">Wep Skill</a>
+                                            <a class="btn btn-outline-dark rolltype-button" id="test-bal-skill-roll" value="Ballistic Skill">Bal Skill</a>
+                                            <a class="btn btn-outline-dark rolltype-button" id="test-str-roll" value="Strengh">Strengh</a>
+                                            <a class="btn btn-outline-dark rolltype-button" id="test-toughness-roll" value="Toughness">Toughness</a>
+                                            <a class="btn btn-outline-dark rolltype-button" id="test-agility-roll" value="Agility">Agility</a>
+                                            <hr>
+                                            <input name="mod" type="range" min="-30" max="30" step="10" class="slider" />
+                                            <p class="mod-label">0</p>
+                                            <a class="btn btn-outline-dark rolltype-button" id="test-intel-roll" value="Intelligence">Intel</a>
+                                            <a class="btn btn-outline-dark rolltype-button" id="test-perception-roll" value="Perception">Percep</a>
+                                            <a class="btn btn-outline-dark rolltype-button" id="test-willpower-roll" value="Willpower">Willpower</a>
+                                            <a class="btn btn-outline-dark rolltype-button" id="test-fellowship-roll" value="Fellowship">Fellowship</a>
+                                            <a class="btn btn-outline-dark rolltype-button" id="test-influence-roll" value="Influence">Influence</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input class="btn btn-success" id="submit_test" name="commit" type="submit" value="Send Roll">
+                            </form>
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <input class="btn btn-success" id="submit_test" name="commit" type="submit" value="Test Roll">
-                        </div>
-                    </div>
-                    <br>
                 </div>
-            </form>
+            </div>
+
+
 
 
 
@@ -199,6 +235,7 @@
 </section>
 
 <!-- All Die Roll Model-->
+
 <div class="modal" id="send-all-model">
     <div class="modal-dialog">
         <div class="modal-content">

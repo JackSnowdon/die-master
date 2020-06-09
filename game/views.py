@@ -198,6 +198,7 @@ def test_dark_roll(request, pk):
     this_game = get_object_or_404(DarkHeresyGame, pk=pk)
     if request.method == "POST":
         mod = request.POST.get("mod")
-        print(mod)
+        rolltype = request.POST.get("rolltype")
+        print(mod, rolltype)
         die_form = DarkRollForm()
     return redirect("set_up_dark", this_game.id)
