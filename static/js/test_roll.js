@@ -11,8 +11,10 @@ $(document).ready(function() {
     });
 
     $(".rolltype-button").click(function() {
+        $(".rolltype-button").removeClass("rolltype-selected");
         var rolltype = $(this).attr('value');
-        console.log(rolltype)
+        $(this).addClass("rolltype-selected")
+        $("#submit-test").fadeIn('slow');
         $("#test-roll-type").attr('value', rolltype);
     });
 

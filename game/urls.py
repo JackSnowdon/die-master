@@ -13,5 +13,5 @@ urlpatterns = [
     path(r'dark_die_roll/<int:diepk>', dark_die_roll, name="dark_die_roll"),
     path(r'delete_all_dark_rolls/<int:pk>', delete_all_dark_rolls, name="delete_all_dark_rolls"),
     path(r'send_all_dark_roll/<int:pk>/<str:rolltype>', send_all_dark_roll, name="send_all_dark_roll"),
-    path(r'test_dark_roll/<int:pk>', test_dark_roll, name="test_dark_roll"),
+    path(r'test_dark_roll/<int:pk>/<int:targetpk>', test_dark_roll, name="test_dark_roll"),
 ]

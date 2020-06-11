@@ -102,7 +102,6 @@
             <p>{{ sheet.die_roll.roll_amount }}</p>
 
 
-
             <!-- Test Area For New Form -->
 
 
@@ -122,11 +121,11 @@
 
                         <div class="modal-body">
 
-                            <form role="form" method="post" id="test_dark_roll" action="{% url 'test_dark_roll' this_game.id %}">
+                            <form role="form" method="post" id="test_dark_roll" action="{% url 'test_dark_roll' this_game.id sheet.id %}">
                                 <div class="form-group body-text">
                                     {% csrf_token %}
                                     <div class="form-row">
-                                        <div class="col-12">
+                                        <div class="col-12 hide-die-roll">
                                             <input type="text" id="test-roll-type" name="rolltype">
                                         </div>
                                     </div>
@@ -150,18 +149,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input class="btn btn-success" id="submit_test" name="commit" type="submit" value="Send Roll">
+                                <input class="btn btn-success" id="submit-test" name="commit" type="submit" value="Send Roll">
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
 
 
             <h5>Previous Rolls:</h5>

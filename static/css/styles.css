@@ -131,6 +131,8 @@
     color: #fc2e1f;
 }
 
+#submit-test,
+.hide-die-roll,
 #sumbit-dark-roller,
 #reroll-button,
 .roller-stats,
@@ -147,6 +149,11 @@
 
 .failed-roll-color {
     color: #fc2e1f;
+}
+
+.rolltype-selected {
+    border-color: #ffc107;
+    border-width: 1px;
 }
 
 

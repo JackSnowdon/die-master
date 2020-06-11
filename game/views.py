@@ -194,11 +194,12 @@ def send_all_dark_roll(request, pk, rolltype):
 
 
 @login_required
-def test_dark_roll(request, pk):
+def test_dark_roll(request, pk, targetpk):
     this_game = get_object_or_404(DarkHeresyGame, pk=pk)
+    target = get_object_or_404(DarkHeresyBase, pk=targetpk)
     if request.method == "POST":
         mod = request.POST.get("mod")
         rolltype = request.POST.get("rolltype")
-        print(mod, rolltype)
+        print(target, mod, rolltype)
         die_form = DarkRollForm()
     return redirect("set_up_dark", this_game.id)
