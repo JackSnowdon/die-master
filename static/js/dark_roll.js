@@ -8,7 +8,10 @@ $(document).ready(function() {
 
     let roller = new Object();
     let threshold = 0;
+    let rmod = $("#mod").text()
     let mod = $("#threshold").text();
+
+    console.log(rmod)
 
     // Setup Functions
 

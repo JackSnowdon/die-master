@@ -148,7 +148,7 @@ def dark_die_roll(request, diepk):
 
 
 @login_required
-def delete_all_dark_rolls(request, pk):
+def delete_all_done_dark_rolls(request, pk):
     this_game = get_object_or_404(DarkHeresyGame, pk=pk)
     profile = request.user.profile
     if profile == this_game.dm:
@@ -158,6 +158,24 @@ def delete_all_dark_rolls(request, pk):
                 r.delete()
         messages.error(
             request, "All Completed Rolls Deleted", extra_tags="alert"
+        )
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+    return redirect("set_up_dark", this_game.id)
+
+
+@login_required
+def delete_all_dark_rolls(request, pk):
+    this_game = get_object_or_404(DarkHeresyGame, pk=pk)
+    profile = request.user.profile
+    if profile == this_game.dm:
+        rolls = this_game.all_game_rolls.all()
+        for r in rolls:
+            r.delete()
+        messages.error(
+            request, "All Rolls Deleted", extra_tags="alert"
         )
     else:
         messages.error(
@@ -197,9 +215,24 @@ def send_all_dark_roll(request, pk, rolltype):
 def test_dark_roll(request, pk, targetpk):
     this_game = get_object_or_404(DarkHeresyGame, pk=pk)
     target = get_object_or_404(DarkHeresyBase, pk=targetpk)
-    if request.method == "POST":
-        mod = request.POST.get("mod")
-        rolltype = request.POST.get("rolltype")
-        print(target, mod, rolltype)
-        die_form = DarkRollForm()
+    profile = request.user.profile
+    if profile == this_game.dm:
+        if request.method == "POST":
+            mod = int(request.POST.get("mod"))
+            rolltype = request.POST.get("rolltype")
+            print(target, mod, rolltype)
+            die_form = DarkRollForm()
+            form = die_form.save(commit=False)
+            form.target_id = target.id
+            form.roll_type = rolltype
+            form.roll_game = this_game
+            form.mod = mod
+            form.fate_points = target.current_fate_points
+            form.save()
+            target.die_roll = get_object_or_404(DarkDieRoll, pk=form.id)
+            target.save()
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )        
     return redirect("set_up_dark", this_game.id)

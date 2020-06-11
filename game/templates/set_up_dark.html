@@ -65,12 +65,15 @@
 {% if this_game.dm == user.profile %}
 
 <section class="dm-ready">
-    <h4>DM Tools:</h4>
+    <h4 class="mb-3">DM Tools:</h4>
     <div class="row dm-tools mb-5 text-center">
-        <div class="col-6">
-            <a href="{% url 'delete_all_dark_rolls' this_game.id %}" role="button" class="btn btn-danger" aria-disabled="false" onclick="return confirm('Are you sure you to delete all completed rolls?');">Delete Completed Rolls</a>
+        <div class="col-4">
+            <a href="{% url 'delete_all_done_dark_rolls' this_game.id %}" role="button" class="btn btn-danger" aria-disabled="false" onclick="return confirm('Are you sure you to delete all completed rolls?');">Delete Completed Rolls</a>
         </div>
-        <div class="col-6">
+        <div class="col-4">
+            <a href="{% url 'delete_all_dark_rolls' this_game.id %}" role="button" class="btn btn-danger" aria-disabled="false" onclick="return confirm('Are you sure you to delete all rolls?');">Delete All Rolls</a>
+        </div>
+        <div class="col-4">
             <a data-toggle="modal" href="#send-all-model" class="btn btn-warning">Send All Rolls</a>
         </div>
     </div>
