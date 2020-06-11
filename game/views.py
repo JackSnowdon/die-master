@@ -91,26 +91,30 @@ def delete_dark_heresy_game(request, pk):
 
 
 @login_required
-def send_dark_die_roll(request, gamepk, targetpk, rolltype):
-    profile = request.user.profile
-    this_game = get_object_or_404(DarkHeresyGame, pk=gamepk)
+def send_dark_die_roll(request, pk, targetpk):
+    this_game = get_object_or_404(DarkHeresyGame, pk=pk)
     target = get_object_or_404(DarkHeresyBase, pk=targetpk)
+    profile = request.user.profile
     if profile == this_game.dm:
-        die_form = DarkRollForm()
-        form = die_form.save(commit=False)
-        form.target_id = target.id
-        form.roll_type = rolltype
-        form.roll_game = this_game
-        form.fate_points = target.current_fate_points
-        form.save()
-        target.die_roll = get_object_or_404(DarkDieRoll, pk=form.id)
-        target.save()         
-        return redirect("set_up_dark", this_game.id)
+        if request.method == "POST":
+            mod = int(request.POST.get("mod"))
+            rolltype = request.POST.get("rolltype")
+            print(target, mod, rolltype)
+            die_form = DarkRollForm()
+            form = die_form.save(commit=False)
+            form.target_id = target.id
+            form.roll_type = rolltype
+            form.roll_game = this_game
+            form.mod = mod
+            form.fate_points = target.current_fate_points
+            form.save()
+            target.die_roll = get_object_or_404(DarkDieRoll, pk=form.id)
+            target.save()
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
-        )
-        return redirect("game_index")
+        )        
+    return redirect("set_up_dark", this_game.id)
 
 
 @login_required
@@ -232,31 +236,4 @@ def send_all_dark_roll(request, pk, rolltype):
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
         )
-    return redirect("set_up_dark", this_game.id)
-
-
-@login_required
-def test_dark_roll(request, pk, targetpk):
-    this_game = get_object_or_404(DarkHeresyGame, pk=pk)
-    target = get_object_or_404(DarkHeresyBase, pk=targetpk)
-    profile = request.user.profile
-    if profile == this_game.dm:
-        if request.method == "POST":
-            mod = int(request.POST.get("mod"))
-            rolltype = request.POST.get("rolltype")
-            print(target, mod, rolltype)
-            die_form = DarkRollForm()
-            form = die_form.save(commit=False)
-            form.target_id = target.id
-            form.roll_type = rolltype
-            form.roll_game = this_game
-            form.mod = mod
-            form.fate_points = target.current_fate_points
-            form.save()
-            target.die_roll = get_object_or_404(DarkDieRoll, pk=form.id)
-            target.save()
-    else:
-        messages.error(
-            request, "You Don't Have The Required Permissions", extra_tags="alert"
-        )        
     return redirect("set_up_dark", this_game.id)

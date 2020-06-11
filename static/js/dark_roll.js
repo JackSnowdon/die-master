@@ -24,7 +24,7 @@ $(document).ready(function() {
         roller.willpower = $("#willpower").text();
         roller.fellowship = $("#fellowship").text();
         roller.influence = $("#influence").text();
-        roller.max_fate_points = $("#max-fate-points").text();
+        roller.current_fate_points = $("#current-fate-points").text();
     };
 
     function PrintRollThresh(x) {
@@ -44,7 +44,7 @@ $(document).ready(function() {
             $("#pass-fail").text("PASSED!").css("color", "green");
         } else {
             $("#pass-fail").text("FAILED!").css("color", "red");
-            if (roller.max_fate_points > 0) {
+            if (roller.current_fate_points > 0) {
                 $("#reroll-button").attr("disabled", false);
                 $("#reroll-promt").text("Spend a fate point to roll again?")
                 $("#reroll-button").show()
@@ -63,10 +63,17 @@ $(document).ready(function() {
         }, 750);
     }
 
+    function checkReveal() {
+        if (roller.current_fate_points == 0) {
+            $("#mod-reveal-button").hide();
+        }
+    }
+
     /* Roll Flow */
 
     getRollerStats()
     PrintRollThresh(roller.rolltype)
+    checkReveal()
 
     /* Roll Buttons */
 
@@ -79,20 +86,21 @@ $(document).ready(function() {
     $("#reroll-button").click(function() {
         $("#sumbit-dark-roller").attr("disabled", true);
         $("#reroll-button").attr("disabled", true);
-        roller.max_fate_points--;
-        currentFP = roller.max_fate_points
-        $("#max-fate-points").text(currentFP);
+        roller.current_fate_points--;
+        currentFP = roller.current_fate_points
+        $("#current-fate-points").text(currentFP);
         $("#id_fate_points").attr("value", currentFP);
         $("#pass-fail").empty()
         dieRoll();
     });
 
 
+
     $("#mod-reveal-button").click(function() {
         $("#mod-reveal-button").hide();
-        roller.max_fate_points--;
-        currentFP = roller.max_fate_points
-        $("#max-fate-points").text(currentFP);
+        roller.current_fate_points--;
+        currentFP = roller.current_fate_points
+        $("#current-fate-points").text(currentFP);
         $("#id_fate_points").attr("value", currentFP);
         $("#mod-reveal").text("Mod: " + mod);
     });

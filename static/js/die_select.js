@@ -14,8 +14,8 @@ $(document).ready(function() {
         $(".rolltype-button").removeClass("rolltype-selected");
         var rolltype = $(this).attr('value');
         $(this).addClass("rolltype-selected")
-        $("#submit-test").fadeIn('slow');
-        $("#test-roll-type").attr('value', rolltype);
+        $(".roll-banner").fadeIn('slow');
+        $(".select-roll-type").attr('value', rolltype);
     });
 
 });

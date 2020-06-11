@@ -8,11 +8,10 @@ urlpatterns = [
     path(r'delete_dark_heresy_game/<int:pk>', delete_dark_heresy_game, name="delete_dark_heresy_game"),
     path(r'change_dark_player_status/<int:pk>/<int:gamepk>', change_dark_player_status, name="change_dark_player_status"),
     path(r'change_ready_state/<int:pk>', change_ready_state, name="change_ready_state"),
-    path(r'send_dark_die_roll/<int:gamepk>/<int:targetpk>/<str:rolltype>', send_dark_die_roll, name="send_dark_die_roll"),
+    path(r'send_dark_die_roll/<int:pk>/<int:targetpk>', send_dark_die_roll, name="send_dark_die_roll"),
     path(r'delete_dark_die_roll/<int:diepk>', delete_dark_die_roll, name="delete_dark_die_roll"),
     path(r'dark_die_roll/<int:diepk>', dark_die_roll, name="dark_die_roll"),
     path(r'delete_all_done_dark_rolls/<int:pk>', delete_all_done_dark_rolls, name="delete_all_done_dark_rolls"),
     path(r'delete_all_dark_rolls/<int:pk>', delete_all_dark_rolls, name="delete_all_dark_rolls"),
     path(r'send_all_dark_roll/<int:pk>/<str:rolltype>', send_all_dark_roll, name="send_all_dark_roll"),
-    path(r'test_dark_roll/<int:pk>/<int:targetpk>', test_dark_roll, name="test_dark_roll"),
 ]
