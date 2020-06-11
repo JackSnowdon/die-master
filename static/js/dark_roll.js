@@ -74,17 +74,28 @@ $(document).ready(function() {
         dieRoll();
     });
 
+    let currentFP = 0;
+
     $("#reroll-button").click(function() {
         $("#sumbit-dark-roller").attr("disabled", true);
         $("#reroll-button").attr("disabled", true);
         roller.max_fate_points--;
-        let currentFP = roller.max_fate_points
+        currentFP = roller.max_fate_points
         $("#max-fate-points").text(currentFP);
         $("#id_fate_points").attr("value", currentFP);
         $("#pass-fail").empty()
         dieRoll();
     });
 
+
+    $("#mod-reveal-button").click(function() {
+        $("#mod-reveal-button").hide();
+        roller.max_fate_points--;
+        currentFP = roller.max_fate_points
+        $("#max-fate-points").text(currentFP);
+        $("#id_fate_points").attr("value", currentFP);
+        $("#mod-reveal").text("Mod: " + mod);
+    });
 
     // Working With Django Forms
 

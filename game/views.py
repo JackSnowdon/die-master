@@ -137,8 +137,30 @@ def dark_die_roll(request, diepk):
         if roll_form.is_valid():
             form = roll_form.save(commit=False)
             total_thresh = form.threshold + form.mod
-            if form.roll_amount <= form.threshold:
-                form.passed = True
+            if form.mod == 0:
+                if form.roll_amount <= total_thresh:
+                    form.passed = True
+                    messages.error(
+                        request, f"{this_roll.roll_type} Passed!", extra_tags="alert"
+                    )
+                else:
+                    messages.error(
+                        request, f"{this_roll.roll_type} Failed!", extra_tags="alert"
+                    )
+            else:
+                if form.roll_amount <= total_thresh:
+                    form.passed = True
+                    messages.error(
+                        request, f"{this_roll.roll_type} Passed!", extra_tags="alert"
+                    )
+                elif form.roll_amount <= form.threshold:
+                    messages.error(
+                        request, f"{this_roll.roll_type} Failed Due To {form.mod} Modifer!", extra_tags="alert"
+                    )
+                else:
+                    messages.error(
+                        request, f"{this_roll.roll_type} Failed!", extra_tags="alert"
+                    )
             roller.current_fate_points = form.fate_points
             roller.save()
             form.save()
