@@ -136,6 +136,7 @@ def dark_die_roll(request, diepk):
         roll_form = DarkRollRoller(request.POST, instance=this_roll)
         if roll_form.is_valid():
             form = roll_form.save(commit=False)
+            total_thresh = form.threshold + form.mod
             if form.roll_amount <= form.threshold:
                 form.passed = True
             roller.current_fate_points = form.fate_points

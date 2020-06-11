@@ -19,4 +19,4 @@ class DarkRollRoller(forms.ModelForm):
 
     class Meta:
         model = DarkDieRoll
-        fields = ['roll_amount', 'fate_points', 'threshold']
+        fields = ['roll_amount', 'fate_points', 'threshold', 'mod']

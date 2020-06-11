@@ -5,4 +5,4 @@ class DarkBaseForm(forms.ModelForm):
 
     class Meta:
         model = DarkHeresyBase
-        exclude = ['created_by']
+        exclude = ['created_by', 'current_fate_points']

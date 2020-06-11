@@ -8,10 +8,7 @@ $(document).ready(function() {
 
     let roller = new Object();
     let threshold = 0;
-    let rmod = $("#mod").text()
-    let mod = $("#threshold").text();
-
-    console.log(rmod)
+    let mod = $("#mod").text()
 
     // Setup Functions
 
@@ -31,8 +28,7 @@ $(document).ready(function() {
     };
 
     function PrintRollThresh(x) {
-        let base = roller[x];
-        threshold = parseInt(mod, 10) + parseInt(base, 10);
+        threshold = roller[x];
         $("#id_threshold").attr("value", threshold);
         $("#roll-threshold").text(threshold)
     }

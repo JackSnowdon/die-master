@@ -21,6 +21,7 @@ def add_dark_heresy(request):
             form = dark_form.save(commit=False)
             user = request.user
             form.created_by = user.profile
+            form.current_fate_points = form.max_fate_points
             form.save()
             messages.error(request, "Added {0}".format(form.name), extra_tags="alert")
             return redirect("world_home")
@@ -38,6 +39,7 @@ def edit_dark_heresy(request, pk):
             dark_form = DarkBaseForm(request.POST, instance=this_sheet)
             if dark_form.is_valid():
                 form = dark_form.save(commit=False)
+                form.current_fate_points = form.max_fate_points
                 form.save()
                 messages.error(
                     request, "Edited {0}".format(form.name), extra_tags="alert"
