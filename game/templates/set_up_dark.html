@@ -101,8 +101,10 @@
                 <a href="{% url 'dark_die_roll' sheet.die_roll.id %}" class="die-link">{{ sheet.die_roll.roll_type }}</a>
                 <a href="{% url 'delete_dark_die_roll' sheet.die_roll.id %}" class="die-delete" onclick="return confirm('Are you sure you to delete {{ sheet.die_roll.roll_type }} Roll?');"><i class="fas fa-dumpster-fire"></i></a> {% endif %}
             </p>
-            {% endif %}
-            <p>{{ sheet.die_roll.roll_amount }}</p>
+            {% if sheet.die_roll.threshold != 0 %}
+            <p>{{ sheet.die_roll.roll_amount }}/{{ sheet.die_roll.threshold }}</p>
+            {% endif %} {% endif %}
+
 
 
             <!-- Test Area For New Form -->
@@ -178,8 +180,9 @@
                 <span class="failed-roll-color"> - Failed</span>{% else %}
                 <a href="{% url 'delete_dark_die_roll' sheet.die_roll.id %}" class="die-delete" onclick="return confirm('Are you sure you to delete {{ sheet.die_roll.roll_type }} Roll?');"><i class="fas fa-dumpster-fire"></i></a> {% endif %}
             </p>
-            {% endif %}
-            <p>{{ sheet.die_roll.roll_amount }}</p>
+            {% if sheet.die_roll.threshold != 0 %}
+            <p>{{ sheet.die_roll.roll_amount }}/{{ sheet.die_roll.threshold }}</p>
+            {% endif %} {% endif %}
             <h5>Previous Rolls:</h5>
             {% for die in this_game.all_game_rolls.all %} {% if die.target_id == sheet.id %}
             <div class="col-12">

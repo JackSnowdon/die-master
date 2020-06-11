@@ -136,8 +136,9 @@ def dark_die_roll(request, diepk):
         roll_form = DarkRollRoller(request.POST, instance=this_roll)
         if roll_form.is_valid():
             form = roll_form.save(commit=False)
-            total_thresh = form.threshold + form.mod
-            if form.mod == 0:
+            mod = form.mod
+            total_thresh = form.threshold + mod
+            if mod == 0:
                 if form.roll_amount <= total_thresh:
                     form.passed = True
                     messages.error(
@@ -151,11 +152,11 @@ def dark_die_roll(request, diepk):
                 if form.roll_amount <= total_thresh:
                     form.passed = True
                     messages.error(
-                        request, f"{this_roll.roll_type} Passed!", extra_tags="alert"
+                        request, f"{this_roll.roll_type} Passed! (+{mod} mod)", extra_tags="alert"
                     )
                 elif form.roll_amount <= form.threshold:
                     messages.error(
-                        request, f"{this_roll.roll_type} Failed Due To {form.mod} Modifer!", extra_tags="alert"
+                        request, f"{this_roll.roll_type} Failed Due To {mod} Modifer!", extra_tags="alert"
                     )
                 else:
                     messages.error(
