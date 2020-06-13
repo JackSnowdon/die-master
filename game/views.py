@@ -99,7 +99,6 @@ def send_dark_die_roll(request, pk, targetpk):
         if request.method == "POST":
             mod = int(request.POST.get("mod"))
             rolltype = request.POST.get("rolltype")
-            print(target, mod, rolltype)
             die_form = DarkRollForm()
             form = die_form.save(commit=False)
             form.target_id = target.id
@@ -213,25 +212,28 @@ def delete_all_dark_rolls(request, pk):
 
 
 @login_required
-def send_all_dark_roll(request, pk, rolltype):
+def send_all_dark_roll(request, pk):
     this_game = get_object_or_404(DarkHeresyGame, pk=pk)
     profile = request.user.profile
-    print(rolltype)
     if profile == this_game.dm:
-        sheets = this_game.sheets.all()
-        for sheet in sheets:
-            die_form = DarkRollForm()
-            form = die_form.save(commit=False)
-            form.target_id = sheet.id
-            form.roll_type = rolltype
-            form.roll_game = this_game
-            form.fate_points = sheet.current_fate_points
-            form.save()
-            sheet.die_roll = get_object_or_404(DarkDieRoll, pk=form.id)
-            sheet.save()
-        messages.error(
-            request, f"{rolltype} sent to all players", extra_tags="alert"
-        )
+        if request.method == "POST":
+            sheets = this_game.sheets.all()
+            mod = int(request.POST.get("mod"))
+            rolltype = request.POST.get("rolltype")
+            for sheet in sheets:
+                die_form = DarkRollForm()
+                form = die_form.save(commit=False)
+                form.target_id = sheet.id
+                form.roll_type = rolltype
+                form.roll_game = this_game
+                form.mod = mod
+                form.fate_points = sheet.current_fate_points
+                form.save()
+                sheet.die_roll = get_object_or_404(DarkDieRoll, pk=form.id)
+                sheet.save()
+            messages.error(
+                request, f"{rolltype} {mod} sent to all players", extra_tags="alert"
+            )
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
