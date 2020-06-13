@@ -43,7 +43,6 @@ def change_dark_player_status(request, pk, gamepk):
     if profile == this_game.dm or this_sheet.created_by == profile: 
         if this_sheet.current_game == None:
             this_sheet.current_game = this_game
-            this_sheet.current_fate_points = this_sheet.max_fate_points
             messages.error(request, 'Added {0} to {1}'.format(this_sheet.name, this_game.name), extra_tags='alert')
         else:
             this_sheet.current_game = None
@@ -234,6 +233,25 @@ def send_all_dark_roll(request, pk):
             messages.error(
                 request, f"{rolltype} {mod} sent to all players", extra_tags="alert"
             )
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+    return redirect("set_up_dark", this_game.id)
+
+
+@login_required
+def reset_all_fate_points(request, pk):
+    this_game = get_object_or_404(DarkHeresyGame, pk=pk)
+    profile = request.user.profile
+    if profile == this_game.dm:
+        sheets = this_game.sheets.all()
+        for sheet in sheets:
+            sheet.current_fate_points = sheet.max_fate_points
+            sheet.save()
+        messages.error(
+            request, "Reset All Fate Points", extra_tags="alert"
+        )    
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
