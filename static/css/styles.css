@@ -156,6 +156,13 @@
     border-width: 1px;
 }
 
+.model-break {
+    width: 225px;
+    height: 0.75px;
+    border: 0;
+    background-color: #ffffff;
+}
+
 
 /* Game Model */
 

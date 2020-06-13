@@ -66,7 +66,7 @@
 
 <section class="dm-ready">
     <h4 class="mb-3">DM Tools:</h4>
-    <div class="row dm-tools mb-5 text-center">
+    <div class="row dm-tools mb-3 text-center">
         <div class="col-3">
             <a href="{% url 'delete_all_done_dark_rolls' this_game.id %}" role="button" class="btn btn-danger" aria-disabled="false" onclick="return confirm('Are you sure you to delete all completed rolls?');">Delete Completed Rolls</a>
         </div>
@@ -81,7 +81,7 @@
         </div>
     </div>
 
-    <div class="row mb-5">
+    <div class="row mb-3">
         <div class="col-12">
             <h3>Players:</h3>
         </div>
@@ -93,6 +93,8 @@
             <a data-toggle="modal" href="#dmDieModel{{ sheet.id }}" class="die-link">
                 <h5>{{ sheet.name }}</h5>
             </a>
+
+
 
             <!-- DM Own Sheets View-->
 
@@ -190,6 +192,11 @@
                             </div>
                         </form>
                     </div>
+
+                    <div class="model-footer text-center">
+                        <hr class="model-break">
+                        <a class="btn btn-outline-dark mb-3" href="{% url 'reward_fate_point' this_game.id sheet.id %}" id="give-fate-point">Reward Fate Point</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -268,7 +275,9 @@
                 <span class="failed-roll-color">{{ sheet.die_roll.roll_type }} - Failed</span> {% else %}
                 <a href="{% url 'dark_die_roll' sheet.die_roll.id %}" class="die-link">{{ sheet.die_roll.roll_type }}</a> {% endif %}
             </p>
-            {% endif %}
+            {% if sheet.die_roll.threshold != 0 %}
+            <p>{{ sheet.die_roll.roll_amount }}/{{ sheet.die_roll.threshold }}</p>
+            {% endif %} {% endif %}
             <h5 class="mb-3">Previous Rolls:</h5>
             {% for die in this_game.all_game_rolls.all %} {% if die.target_id == sheet.id %}
             <div class="col-12">

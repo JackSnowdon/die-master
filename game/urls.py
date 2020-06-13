@@ -15,4 +15,5 @@ urlpatterns = [
     path(r'delete_all_dark_rolls/<int:pk>', delete_all_dark_rolls, name="delete_all_dark_rolls"),
     path(r'send_all_dark_roll/<int:pk>', send_all_dark_roll, name="send_all_dark_roll"),
     path(r'reset_all_fate_points/<int:pk>', reset_all_fate_points, name="reset_all_fate_points"),
+    path(r'reward_fate_point/<int:pk>/<int:targetpk>', reward_fate_point, name="reward_fate_point"),
 ]

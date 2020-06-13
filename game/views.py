@@ -257,3 +257,21 @@ def reset_all_fate_points(request, pk):
             request, "You Don't Have The Required Permissions", extra_tags="alert"
         )
     return redirect("set_up_dark", this_game.id)
+
+
+@login_required
+def reward_fate_point(request, pk, targetpk):
+    this_game = get_object_or_404(DarkHeresyGame, pk=pk)
+    profile = request.user.profile
+    target = get_object_or_404(DarkHeresyBase, pk=targetpk)
+    if profile == this_game.dm:
+        target.current_fate_points += 1
+        target.save()
+        messages.error(
+            request, f"Rewarded {target} With A Fate Point!", extra_tags="alert"
+        )
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+    return redirect("set_up_dark", this_game.id)
