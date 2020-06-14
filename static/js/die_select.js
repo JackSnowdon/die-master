@@ -18,4 +18,9 @@ $(document).ready(function() {
         $(".select-roll-type").attr('value', rolltype);
     });
 
+    $('#send-all-model').on('hidden.bs.modal', function() {
+        $(".rolltype-button").removeClass("rolltype-selected");
+        $(".roll-banner").fadeOut('slow');
+    })
+
 });
