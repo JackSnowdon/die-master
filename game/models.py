@@ -42,5 +42,5 @@ class DarkCombatant(models.Model):
     initiative = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(25)], default=0)
 
     def __str__(self):
-        return "Combatant Instance For ID:{0}".format(self.target_id)
+        return "Combatant Instance For ID:{0}".format(self.combatant_id)
 

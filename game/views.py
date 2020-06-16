@@ -323,9 +323,15 @@ def init_combat(request, pk):
         combat = form.save(commit=False)
         combat.combat_game = this_game
         combat.save()
-        print(combat.id)
         for sheet in this_game.sheets.all():
-            print(sheet.id)
+            dark_form = DarkCombatantForm()
+            combatant = dark_form.save(commit=False)
+            combatant.combat_instance = combat
+            combatant.combatant_id = sheet.id
+            combatant.save()
+        messages.error(
+            request, "Created Combat Instance", extra_tags="alert"
+        )
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"

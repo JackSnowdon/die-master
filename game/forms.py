@@ -27,3 +27,10 @@ class DarkCombatForm(forms.ModelForm):
     class Meta:
         model = DarkCombat
         exclude = ['completed']
+
+
+class DarkCombatantForm(forms.ModelForm):
+
+    class Meta:
+        model = DarkCombatant
+        exclude = ['initiative']

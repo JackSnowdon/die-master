@@ -5,3 +5,5 @@ from .models import *
 
 admin.site.register(DarkHeresyGame)
 admin.site.register(DarkDieRoll)
+admin.site.register(DarkCombatant)
+admin.site.register(DarkCombat)
