@@ -20,3 +20,10 @@ class DarkRollRoller(forms.ModelForm):
     class Meta:
         model = DarkDieRoll
         fields = ['roll_amount', 'fate_points', 'threshold', 'mod']
+
+
+class DarkCombatForm(forms.ModelForm):
+
+    class Meta:
+        model = DarkCombat
+        exclude = ['completed']

@@ -312,3 +312,23 @@ def reward_fate_point(request, pk, targetpk):
             request, "You Don't Have The Required Permissions", extra_tags="alert"
         )
     return redirect("set_up_dark", this_game.id)
+
+
+@login_required
+def init_combat(request, pk):
+    this_game = get_object_or_404(DarkHeresyGame, pk=pk)
+    profile = request.user.profile
+    if profile == this_game.dm:
+        form = DarkCombatForm()
+        combat = form.save(commit=False)
+        combat.combat_game = this_game
+        combat.save()
+        print(combat.id)
+        for sheet in this_game.sheets.all():
+            print(sheet.id)
+    else:
+        messages.error(
+            request, "You Don't Have The Required Permissions", extra_tags="alert"
+        )
+    return redirect("set_up_dark", this_game.id)
+
