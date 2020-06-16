@@ -37,10 +37,10 @@ class DarkCombat(models.Model):
 
 
 class DarkCombatant(models.Model):
-    combat_instance = models.ForeignKey(DarkCombat, related_name='combantants', on_delete=models.CASCADE)
+    combat_instance = models.ForeignKey(DarkCombat, related_name='combatants', on_delete=models.CASCADE)
     combatant_id = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(10000000)], default=0)
     initiative = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(25)], default=0)
 
     def __str__(self):
-        return "Combatant Instance For ID:{0}".format(self.combatant_id)
+        return "Combatant Instance For ID: {0}".format(self.combatant_id)
 

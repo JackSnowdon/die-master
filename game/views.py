@@ -329,12 +329,28 @@ def init_combat(request, pk):
             combatant.combat_instance = combat
             combatant.combatant_id = sheet.id
             combatant.save()
+        combat.save()
         messages.error(
-            request, "Created Combat Instance", extra_tags="alert"
+            request, f"Created Combat Instance {combat.id}", extra_tags="alert"
         )
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
         )
     return redirect("set_up_dark", this_game.id)
+
+
+@login_required
+def enter_combat(request, pk, combatpk):
+    this_game = get_object_or_404(DarkHeresyGame, pk=pk)
+    this_combat = get_object_or_404(DarkCombat, pk=combatpk)
+    combatants = this_combat.combatants.all()
+    print(combatants)
+    for c in combatants:
+        comb = get_object_or_404(DarkHeresyBase, pk=c.combatant_id)
+        print(f"Fighter {c.combatant_id} IS {comb.name}")
+    return render(
+        request, "enter_combat.html", {"this_game": this_game, "this_combat": this_combat}
+    )
+
 
