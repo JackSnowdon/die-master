@@ -7,10 +7,11 @@ from world.models import *
 
 # Create your views here.
 
+
 @login_required
 def game_index(request):
-    dark_sheets = DarkHeresyGame.objects.order_by('name')
-    return render(request, "game_index.html", {"dark_sheets":dark_sheets })
+    dark_sheets = DarkHeresyGame.objects.order_by("name")
+    return render(request, "game_index.html", {"dark_sheets": dark_sheets})
 
 
 @login_required
@@ -25,14 +26,27 @@ def start_new_dark_game(request):
             return redirect("set_up_dark", form.id)
     else:
         game_form = DarkGameForm()
-    return render(request, "start_new_dark_game.html", {"game_form": game_form}) 
+    return render(request, "start_new_dark_game.html", {"game_form": game_form})
 
 
 @login_required
 def set_up_dark(request, pk):
     this_game = get_object_or_404(DarkHeresyGame, pk=pk)
-    dh_sheets = DarkHeresyBase.objects.order_by('name').filter(current_game=None)
-    return render(request, "set_up_dark.html", {"this_game": this_game, "dh_sheets": dh_sheets})
+    sheets = DarkHeresyBase.objects.order_by("name")
+    dh_sheets = sheets.filter(current_game=None)
+    if this_game.ready_state == True:
+        result = any(
+            elem in this_game.sheets.all()
+            for elem in request.user.profile.dh_sheets.all()
+        )
+        if result == False:
+            messages.error(
+                request, f"You have no sheets in {this_game}", extra_tags="alert"
+            )
+            return redirect("game_index")
+    return render(
+        request, "set_up_dark.html", {"this_game": this_game, "dh_sheets": dh_sheets}
+    )
 
 
 @login_required
@@ -40,13 +54,21 @@ def change_dark_player_status(request, pk, gamepk):
     this_sheet = get_object_or_404(DarkHeresyBase, pk=pk)
     this_game = get_object_or_404(DarkHeresyGame, pk=gamepk)
     profile = request.user.profile
-    if profile == this_game.dm or this_sheet.created_by == profile: 
+    if profile == this_game.dm or this_sheet.created_by == profile:
         if this_sheet.current_game == None:
             this_sheet.current_game = this_game
-            messages.error(request, 'Added {0} to {1}'.format(this_sheet.name, this_game.name), extra_tags='alert')
+            messages.error(
+                request,
+                "Added {0} to {1}".format(this_sheet.name, this_game.name),
+                extra_tags="alert",
+            )
         else:
             this_sheet.current_game = None
-            messages.error(request, 'Removed {0} from {1}'.format(this_sheet.name, this_game.name), extra_tags='alert')
+            messages.error(
+                request,
+                "Removed {0} from {1}".format(this_sheet.name, this_game.name),
+                extra_tags="alert",
+            )
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
@@ -62,10 +84,14 @@ def change_ready_state(request, pk):
     if profile == this_game.dm:
         if this_game.ready_state == False:
             this_game.ready_state = True
-            messages.error(request, 'Set {0} to Ready'.format(this_game.name), extra_tags='alert')
+            messages.error(
+                request, "Set {0} to Ready".format(this_game.name), extra_tags="alert"
+            )
         else:
             this_game.ready_state = False
-            messages.error(request, 'Unreadied {0}'.format(this_game.name), extra_tags='alert')
+            messages.error(
+                request, "Unreadied {0}".format(this_game.name), extra_tags="alert"
+            )
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
@@ -79,9 +105,11 @@ def delete_dark_heresy_game(request, pk):
     this_game = get_object_or_404(DarkHeresyGame, pk=pk)
     profile = request.user.profile
     if profile == this_game.dm or profile.staff_access:
-        messages.error(request, 'Deleted {0}'.format(this_game.name), extra_tags='alert')
+        messages.error(
+            request, "Deleted {0}".format(this_game.name), extra_tags="alert"
+        )
         this_game.delete()
-        return redirect(reverse('game_index'))
+        return redirect(reverse("game_index"))
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
@@ -111,7 +139,7 @@ def send_dark_die_roll(request, pk, targetpk):
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
-        )        
+        )
     return redirect("set_up_dark", this_game.id)
 
 
@@ -120,7 +148,9 @@ def delete_dark_die_roll(request, diepk):
     this_roll = get_object_or_404(DarkDieRoll, pk=diepk)
     profile = request.user.profile
     if profile == this_roll.roll_game.dm:
-        messages.error(request, 'Deleted {0}'.format(this_roll.roll_type), extra_tags='alert')
+        messages.error(
+            request, "Deleted {0}".format(this_roll.roll_type), extra_tags="alert"
+        )
         this_roll.delete()
     else:
         messages.error(
@@ -154,11 +184,15 @@ def dark_die_roll(request, diepk):
                 if form.roll_amount <= total_thresh:
                     form.passed = True
                     messages.error(
-                        request, f"{this_roll.roll_type} Passed! (+{mod} mod)", extra_tags="alert"
+                        request,
+                        f"{this_roll.roll_type} Passed! (+{mod} mod)",
+                        extra_tags="alert",
                     )
                 elif form.roll_amount <= form.threshold:
                     messages.error(
-                        request, f"{this_roll.roll_type} Failed Due To {mod} Modifer!", extra_tags="alert"
+                        request,
+                        f"{this_roll.roll_type} Failed Due To {mod} Modifer!",
+                        extra_tags="alert",
                     )
                 else:
                     messages.error(
@@ -167,10 +201,19 @@ def dark_die_roll(request, diepk):
             roller.current_fate_points = form.fate_points
             roller.save()
             form.save()
-            return redirect("set_up_dark", this_roll.roll_game.id)    
-    else: 
+            return redirect("set_up_dark", this_roll.roll_game.id)
+    else:
         roll_form = DarkRollRoller(instance=this_roll)
-        return render(request, "dark_die_roll.html", {"this_roll": this_roll, "roller": roller, "rolltype": rolltype, "roll_form": roll_form})
+        return render(
+            request,
+            "dark_die_roll.html",
+            {
+                "this_roll": this_roll,
+                "roller": roller,
+                "rolltype": rolltype,
+                "roll_form": roll_form,
+            },
+        )
 
 
 @login_required
@@ -182,9 +225,7 @@ def delete_all_done_dark_rolls(request, pk):
         for r in rolls:
             if r.roll_amount != 0 or r.passed:
                 r.delete()
-        messages.error(
-            request, "All Completed Rolls Deleted", extra_tags="alert"
-        )
+        messages.error(request, "All Completed Rolls Deleted", extra_tags="alert")
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
@@ -200,9 +241,7 @@ def delete_all_dark_rolls(request, pk):
         rolls = this_game.all_game_rolls.all()
         for r in rolls:
             r.delete()
-        messages.error(
-            request, "All Rolls Deleted", extra_tags="alert"
-        )
+        messages.error(request, "All Rolls Deleted", extra_tags="alert")
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
@@ -249,9 +288,7 @@ def reset_all_fate_points(request, pk):
         for sheet in sheets:
             sheet.current_fate_points = sheet.max_fate_points
             sheet.save()
-        messages.error(
-            request, "Reset All Fate Points", extra_tags="alert"
-        )    
+        messages.error(request, "Reset All Fate Points", extra_tags="alert")
     else:
         messages.error(
             request, "You Don't Have The Required Permissions", extra_tags="alert"
