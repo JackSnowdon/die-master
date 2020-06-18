@@ -345,7 +345,7 @@ def enter_combat(request, combatpk):
     this_combat = get_object_or_404(DarkCombat, pk=combatpk)
     this_game = this_combat.combat_game
     combatants = []
-    base = this_combat.combatants.all()
+    base = this_combat.combatants.all().order_by('-initiative')
     for i, c in enumerate(base):
         comb = get_object_or_404(DarkHeresyBase, pk=c.combatant_id)
         combatants.append(comb)
@@ -362,8 +362,11 @@ def roll_dark_init(request, pk):
     this_base = get_object_or_404(DarkHeresyBase, pk=this_instance.combatant_id)
     if request.method == "POST":
         total = int(request.POST.get("final-init-sumbit"))
-        print(total)
-    profile = request.user.profile
+        this_instance.initiative = total
+        this_instance.save()
+        messages.error(
+            request, f"{this_base} Rolled {total} Initiative", extra_tags="alert"
+        )
     mod = int(str(this_base.agility)[:1])
     return redirect("enter_combat", this_combat.id)
 
