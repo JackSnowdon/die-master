@@ -1,5 +1,13 @@
 {% extends 'base.html' %} {% load static %} {% block page_title %} {{ this_combat }} | Die Master {% endblock %} {% block content %}
 
+<section class="button-nav">
+    <div class="row mb-5">
+        <div class="col-12">
+            <a href="{% url 'set_up_dark' this_game.id %}" role="button" class="btn btn-warning" aria-disabled="false">Back</a>
+        </div>
+    </div>
+</section>
+
 <section class="header">
     <div class="row mb-5">
         <div class="col-12 text-center">
@@ -12,10 +20,11 @@
     <div class="row text-center">
         {% for c in combatants %}
         <div class="col-md-4 col-6">
-            <p>{{ c.name }}</p>
+            <h5>Fighter {{ forloop.counter }}: {{ c.name }}</h5>
             {% for comb in this_combat.combatants.all %} {% if comb.combatant_id == c.id %}
-            <p>{{ comb.combatant_id }}{{ c.id }}</p>
-            <p>{{ comb.initiative }}</p>
+            <p>Initiative: {{ comb.initiative }}</p>
+            {% if user.profile == c.created_by and comb.initiative == 0 %}
+            <a href="{% url 'roll_dark_init' comb.id %}" role="button" class="btn btn-success mb-3" aria-disabled="false">Roll</a> {% endif %}
         </div>
         {% endif %} {% endfor %} {% endfor %}
     </div>

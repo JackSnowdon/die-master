@@ -341,9 +341,9 @@ def init_combat(request, pk):
 
 
 @login_required
-def enter_combat(request, pk, combatpk):
-    this_game = get_object_or_404(DarkHeresyGame, pk=pk)
+def enter_combat(request, combatpk):
     this_combat = get_object_or_404(DarkCombat, pk=combatpk)
+    this_game = this_combat.combat_game
     combatants = []
     base = this_combat.combatants.all()
     for i, c in enumerate(base):
@@ -353,6 +353,16 @@ def enter_combat(request, pk, combatpk):
     return render(
         request, "enter_combat.html", {"this_game": this_game, "this_combat": this_combat, "combatants": combatants}
     )
+
+
+@login_required
+def roll_dark_init(request, pk):
+    this_instance = get_object_or_404(DarkCombatant, pk=pk)
+    this_combat = this_instance.combat_instance
+    this_base = get_object_or_404(DarkHeresyBase, pk=this_instance.combatant_id)
+    profile = request.user.profile
+    print(this_instance, this_base.agility, this_combat)
+    return redirect("enter_combat", this_combat.id)
 
 
 @login_required

@@ -17,6 +17,7 @@ urlpatterns = [
     path(r'reset_all_fate_points/<int:pk>', reset_all_fate_points, name="reset_all_fate_points"),
     path(r'reward_fate_point/<int:pk>/<int:targetpk>', reward_fate_point, name="reward_fate_point"),
     path(r'init_combat/<int:pk>', init_combat, name="init_combat"),
-    path(r'enter_combat/<int:pk>/<int:combatpk>', enter_combat, name="enter_combat"),
+    path(r'enter_combat/<int:combatpk>', enter_combat, name="enter_combat"),
+    path(r'roll_dark_init/<int:pk>/', roll_dark_init, name="roll_dark_init"),
     path(r'delete_all_combats/<int:pk>/', delete_all_combats, name="delete_all_combats"),
 ]
