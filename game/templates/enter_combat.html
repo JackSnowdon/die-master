@@ -9,8 +9,15 @@
 </section>
 
 <section class="combatants">
-    <div class="row">
-
+    <div class="row text-center">
+        {% for c in combatants %}
+        <div class="col-md-4 col-6">
+            <p>{{ c.name }}</p>
+            {% for comb in this_combat.combatants.all %} {% if comb.combatant_id == c.id %}
+            <p>{{ comb.combatant_id }}{{ c.id }}</p>
+            <p>{{ comb.initiative }}</p>
+        </div>
+        {% endif %} {% endfor %} {% endfor %}
     </div>
 </section>
 

@@ -350,9 +350,8 @@ def enter_combat(request, pk, combatpk):
         comb = get_object_or_404(DarkHeresyBase, pk=c.combatant_id)
         combatants.append(comb)
         print(f"Fighter {i+1} IS {comb.name}")
-    print(combatants)
     return render(
-        request, "enter_combat.html", {"this_game": this_game, "this_combat": this_combat}
+        request, "enter_combat.html", {"this_game": this_game, "this_combat": this_combat, "combatants": combatants}
     )
 
 
