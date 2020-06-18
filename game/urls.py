@@ -18,4 +18,5 @@ urlpatterns = [
     path(r'reward_fate_point/<int:pk>/<int:targetpk>', reward_fate_point, name="reward_fate_point"),
     path(r'init_combat/<int:pk>', init_combat, name="init_combat"),
     path(r'enter_combat/<int:pk>/<int:combatpk>', enter_combat, name="enter_combat"),
+    path(r'delete_all_combats/<int:pk>/', delete_all_combats, name="delete_all_combats"),
 ]
