@@ -360,9 +360,11 @@ def roll_dark_init(request, pk):
     this_instance = get_object_or_404(DarkCombatant, pk=pk)
     this_combat = this_instance.combat_instance
     this_base = get_object_or_404(DarkHeresyBase, pk=this_instance.combatant_id)
+    if request.method == "POST":
+        total = int(request.POST.get("final-init-sumbit"))
+        print(total)
     profile = request.user.profile
     mod = int(str(this_base.agility)[:1])
-    print(mod)
     return redirect("enter_combat", this_combat.id)
 
 
