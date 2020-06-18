@@ -24,8 +24,46 @@
             {% for comb in this_combat.combatants.all %} {% if comb.combatant_id == c.id %}
             <p>Initiative: {{ comb.initiative }}</p>
             {% if user.profile == c.created_by and comb.initiative == 0 %}
-            <a href="{% url 'roll_dark_init' comb.id %}" role="button" class="btn btn-success mb-3" aria-disabled="false">Roll</a> {% endif %}
+            <a data-toggle="modal" href="#initModel{{ c.id }}" class="die-link">
+                <h5>Roll Init</h5>
+            </a>
+
+            <div class="modal" id="initModel{{ c.id }}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4>Init Roll For {{ c.name }}</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form role="form" method="post" id="test_dark_roll" action="#">
+                                {% csrf_token %}
+                            </form>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5>Modifer: = {{ c.agility|slugify|slice:":1" }}</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="model-footer text-center">
+                            <hr class="model-break">
+                            <a href="{% url 'roll_dark_init' comb.id %}" role="button" class="btn btn-success mb-3" aria-disabled="false">Roll</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
         </div>
+
+
+
+
+
         {% endif %} {% endfor %} {% endfor %}
     </div>
 </section>

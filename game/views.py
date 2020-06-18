@@ -361,7 +361,8 @@ def roll_dark_init(request, pk):
     this_combat = this_instance.combat_instance
     this_base = get_object_or_404(DarkHeresyBase, pk=this_instance.combatant_id)
     profile = request.user.profile
-    print(this_instance, this_base.agility, this_combat)
+    mod = int(str(this_base.agility)[:1])
+    print(mod)
     return redirect("enter_combat", this_combat.id)
 
 
