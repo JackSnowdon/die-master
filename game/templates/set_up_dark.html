@@ -89,7 +89,7 @@
     <div class="row mb-1 text-center">
         {% for combat in this_game.all_game_combats.all %}
         <div class="col-1">
-            <a href="{% url 'enter_combat' combat.id %}">
+            <a href="{% url 'enter_combat' combat.id %}" class="die-link">
                 <p>{{ combat.id }}</p>
             </a>
         </div>
@@ -280,6 +280,16 @@
 <!-- User View -->
 
 <section class="user-ready">
+    <h4 class="mb-1">Combats:</h4>
+    <div class="row mb-5 text-center">
+        {% for combat in this_game.all_game_combats.all %}
+        <div class="col-1">
+            <a href="{% url 'enter_combat' combat.id %}" class="die-link">
+                <p>{{ combat.id }}</p>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
     <div class="row mb-5">
         <div class="col-12">
             <h3>Players:</h3>

@@ -9,7 +9,7 @@ $(document).ready(function() {
     }
 
     function initRoll() {
-        $("#init-roll-button").attr("disabled", true);
+        $(".init-roll-button").attr("disabled", true);
         let result = getDiceRoll(10);
         setTimeout(function() {
             printInitTotals(result)
@@ -26,7 +26,7 @@ $(document).ready(function() {
 
     /* Roll Buttons */
 
-    $("#init-roll-button").click(function() {
+    $(".init-roll-button").click(function() {
         initRoll();
     });
 
