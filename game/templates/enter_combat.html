@@ -23,7 +23,26 @@
             <h5>Fighter {{ forloop.counter }}: {{ c.name }}</h5>
             {% for comb in this_combat.combatants.all %} {% if comb.combatant_id == c.id %}
             <p>Initiative: {{ comb.initiative }}</p>
-            {% if user.profile == c.created_by and comb.initiative == 0 %}
+            {% if user.profile == c.created_by %}
+            <div class="dh-card-back mb-3">
+                <div class="row mb-3 text-center">
+                    <div class="col-6">
+                        <h5 class="mt-2">Weapon Skill </br>{{ c.weapon_skill }}</h5>
+                        <h5>Ballistic Skill </br>{{ c.ballistic_skill }}</h5>
+                        <h5>Strengh </br>{{ c.strengh }}</h5>
+                        <h5>Toughness </br>{{ c.toughness }}</h5>
+                        <h5>Agility </br>{{ c.agility }}</h5>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="mt-2">Intelligence </br>{{ c.intelligence }}</h5>
+                        <h5>Perception </br>{{ c.perception }}</h5>
+                        <h5>Willpower </br>{{ c.willpower }}</h5>
+                        <h5>Fellowship </br>{{ c.fellowship }}</h5>
+                        <h5>Influence </br>{{ c.influence }} </h5>
+                    </div>
+                </div>
+                <h5>Current Fate Points: {{ c.current_fate_points }}</h5>
+            </div> {% endif %} {% if user.profile == c.created_by and comb.initiative == 0 %}
             <a data-toggle="modal" href="#initModel{{ c.id }}" role="button" aria-disabled="false" class="btn btn-success mb-3">
                 Roll Init
             </a>
